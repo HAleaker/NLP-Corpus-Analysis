@@ -18,4 +18,8 @@ ADD ./src /src
 
 WORKDIR /src/eea.corpus
 
-RUN pip install -e ".
+RUN pip install -e ".[testing]"
+
+CMD pserve /src/eea.corpus/development.ini
+
+EXPOSE 6543
