@@ -1,0 +1,7 @@
+Ideas on what to improve and do next:
+
+1. DONE Add full body of pages / content types in csv file
+
+2. DONE Better tokenizier and pre-processing.
+
+3. DONE strip html code from text wi
