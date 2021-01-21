@@ -4,4 +4,15 @@ Ideas on what to improve and do next:
 
 2. DONE Better tokenizier and pre-processing.
 
-3. DONE strip html code from text wi
+3. DONE strip html code from text with beautifulsoup4
+
+4. DONE Install phrasemachine
+
+#install pip2.7
+curl -O https://bootstrap.pypa.io/get-pip.py
+sudo python2.7 get-pip.py
+pip2 install phrasemachine
+
+#Or better convert to python3
+https://github.com/slanglab/phrasemachine/issues/9
+2to3 -w 
