@@ -15,4 +15,11 @@ pip2 install phrasemachine
 
 #Or better convert to python3
 https://github.com/slanglab/phrasemachine/issues/9
-2to3 -w 
+2to3 -w example.py
+
+cd /usr/local/lib/python3.6/site-packages/phrasemachine
+2to3 -w *.py
+
+5. when tokenizing with phrasemachine, do it on one sentence at the time and
+not over a large text. Otherwise you get too many phrases and false positives 
+m
