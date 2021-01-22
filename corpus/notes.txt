@@ -22,4 +22,11 @@ cd /usr/local/lib/python3.6/site-packages/phrasemachine
 
 5. when tokenizing with phrasemachine, do it on one sentence at the time and
 not over a large text. Otherwise you get too many phrases and false positives 
-m
+made up of words from multiple sentences, somehow phrasemachine expects one
+sentence only. OR give up with full text and use only title and description.
+
+6. Stemming?
+
+7. If we take only Title, use only document with Title that has at least 5 terms
+
+8. provide SPACY AP
