@@ -29,4 +29,9 @@ sentence only. OR give up with full text and use only title and description.
 
 7. If we take only Title, use only document with Title that has at least 5 terms
 
-8. provide SPACY AP
+8. provide SPACY API see https://github.com/jgontrum/spacy-api-docker
+
+9. FEATURE: Semantic Network Viz: textacy.viz.draw_semantic_network 
+
+see two examples: 
+based on POS tokens https://github.com/oroszgy/hungarian-text-mining-workshop/blob/master/1_In
