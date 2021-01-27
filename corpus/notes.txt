@@ -34,4 +34,10 @@ sentence only. OR give up with full text and use only title and description.
 9. FEATURE: Semantic Network Viz: textacy.viz.draw_semantic_network 
 
 see two examples: 
-based on POS tokens https://github.com/oroszgy/hungarian-text-mining-workshop/blob/master/1_In
+based on POS tokens https://github.com/oroszgy/hungarian-text-mining-workshop/blob/master/1_Intro.ipynb which 
+based on pagerank https://github.com/bdewilde/pygotham_2016/blob/master/pygotham_2016.ipynb
+
+10. FEATURE: add t-SNE visualisation. 
+
+e.g. based ona word2vec model of entire corpus 
+https://www.jeffreythompson.org/blog/2017/02
