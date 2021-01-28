@@ -45,4 +45,8 @@ https://www.jeffreythompson.org/blog/2017/02/13/using-word2vec-and-tsne/
 or just the discovered topics
 http://ahmedbesbes.com/how-to-mine-newsfeed-data-and-extract-interactive-insights-in-python.html
 
-11. FEATURE: preview top documents when hovering/selecting a node on a visualisation (clus
+11. FEATURE: preview top documents when hovering/selecting a node on a visualisation (cluster in ldavis, node in the
+networkviz, node in t-SNE etc). 
+
+12. FEATURE: in preparation text, add possibility to extract via NER-algorithm, e.g. one should be able to tokenise only
+LOCATIONS and/or PEOPLE and/or ORGANISATIONS etc... and use the stand
