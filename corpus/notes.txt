@@ -49,4 +49,8 @@ http://ahmedbesbes.com/how-to-mine-newsfeed-data-and-extract-interactive-insight
 networkviz, node in t-SNE etc). 
 
 12. FEATURE: in preparation text, add possibility to extract via NER-algorithm, e.g. one should be able to tokenise only
-LOCATIONS and/or PEOPLE and/or ORGANISATIONS etc... and use the stand
+LOCATIONS and/or PEOPLE and/or ORGANISATIONS etc... and use the standard visualisations provided by eea.corpus
+(ldaviz,termite,wordcloud or whatever we add).
+
+13. FEATURE: add visualisation via a map viewer. If user chooses to visualise the corpus on a map than the NER extraction of
+LOCATIONS will take place (or exist
