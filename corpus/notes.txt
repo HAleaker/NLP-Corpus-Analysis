@@ -53,4 +53,10 @@ LOCATIONS and/or PEOPLE and/or ORGANISATIONS etc... and use the standard visuali
 (ldaviz,termite,wordcloud or whatever we add).
 
 13. FEATURE: add visualisation via a map viewer. If user chooses to visualise the corpus on a map than the NER extraction of
-LOCATIONS will take place (or exist
+LOCATIONS will take place (or existing one reused) and documents will be clustered on a map, a heatmap would be nice.
+
+See a nice notebook example https://anaconda.org/jbednar/nyc_taxi/notebook
+
+14. FEATURE: add extra basic corpus visualisations like histograms and distributions.
+  
+15. FEATURE: si
