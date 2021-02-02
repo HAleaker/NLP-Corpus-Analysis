@@ -59,4 +59,7 @@ See a nice notebook example https://anaconda.org/jbednar/nyc_taxi/notebook
 
 14. FEATURE: add extra basic corpus visualisations like histograms and distributions.
   
-15. FEATURE: si
+15. FEATURE: simple corpus document search engine. enter a word or phrase and get most semantically similar sentences from
+corpus (based on word2vec/sent2vwc similarity) and its related top documents (where the sentence appears) as results with
+active link.
+
