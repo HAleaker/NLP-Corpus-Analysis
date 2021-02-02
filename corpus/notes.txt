@@ -63,3 +63,5 @@ See a nice notebook example https://anaconda.org/jbednar/nyc_taxi/notebook
 corpus (based on word2vec/sent2vwc similarity) and its related top documents (where the sentence appears) as results with
 active link.
 
+16. FEATURE: after the topic modeling is done. give possibility to name the topics discovered, e.g. giving a short name to a
+topic 1 as "Climate change" and topic 2 "Water" and topic 3 "Organisational" etc. The names are saved and used in subse
