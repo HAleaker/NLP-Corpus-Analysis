@@ -64,4 +64,10 @@ corpus (based on word2vec/sent2vwc similarity) and its related top documents (wh
 active link.
 
 16. FEATURE: after the topic modeling is done. give possibility to name the topics discovered, e.g. giving a short name to a
-topic 1 as "Climate change" and topic 2 "Water" and topic 3 "Organisational" etc. The names are saved and used in subse
+topic 1 as "Climate change" and topic 2 "Water" and topic 3 "Organisational" etc. The names are saved and used in subsequence
+visualisations instead of the topic numbering.
+
+17. FEATURE. Add Wordlcoud for entire corpus on top, below topics wordcloud. Wordcloud should take the terms that are more
+specific to the topic (lower lambda).
+
+18. FEATURE: add timeline vi
