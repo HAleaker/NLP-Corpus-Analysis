@@ -70,4 +70,8 @@ visualisations instead of the topic numbering.
 17. FEATURE. Add Wordlcoud for entire corpus on top, below topics wordcloud. Wordcloud should take the terms that are more
 specific to the topic (lower lambda).
 
-18. FEATURE: add timeline vi
+18. FEATURE: add timeline visualisation. Extract dates information via NER and display documents on a histogram / timeline
+visualisation.
+
+19. FEATURE: use textacy DEPECHEMOOD 
+http://textacy.readthedocs.io/en/latest/api_reference.html?highlight=depech#textac
