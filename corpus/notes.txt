@@ -88,4 +88,6 @@ we could add:
 
  - Elasticserch backend. the possibility to connect to existing Elasticsearch index (this would allow to get the data
    directly from our eea main elasticsearch)
- - data from a URL. this would allow to 
+ - data from a URL. this would allow to fetch data lively from a URL (which returns a csv/json). 
+   For example we would create SPARQL queries on a plone site and we can just use the URL to CSV/JSON in eea.corpus. 
+   This way we don't need to add a sparql client in eea.corpu
