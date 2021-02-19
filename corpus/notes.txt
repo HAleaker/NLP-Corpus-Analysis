@@ -84,3 +84,8 @@ versus the other topics OR compare two corpora with eachother.
 than the preprocessing is not working.
 
 22. FEATURE. more data source inputs. Beside the current possibility to upload a CSV file direclty, 
+we could add:
+
+ - Elasticserch backend. the possibility to connect to existing Elasticsearch index (this would allow to get the data
+   directly from our eea main elasticsearch)
+ - data from a URL. this would allow to 
