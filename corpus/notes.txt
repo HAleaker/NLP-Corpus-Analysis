@@ -93,4 +93,4 @@ we could add:
    This way we don't need to add a sparql client in eea.corpus if we want to get data direcly from our SDS. We have quite
    many sparqls tables available, see https://www.eea.europa.eu/code/api and https://www.eea.europa.eu/data-and-maps/daviz/sds.
 
-23. provide a way for analysing only via Information Extraction pipeline, for exam
+23. provide a way for analysing only via Information Extraction pipeline, for example extract only NER-entities, phrases or n-grams for further processing into corpus visualisations.
