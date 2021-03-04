@@ -16,4 +16,14 @@ def _get_term_freqs(dtm):
     return dtm.sum(axis=0).getA1()
 
 
-def _row_norm(dist
+def _row_norm(dists):
+    # row normalization function required
+    # for doc_topic_dists and topic_term_dists
+    return dists / dists.sum(axis=1)[:, None]
+
+
+def _get_doc_topic_dists(lda_model, dtm):
+    return _row_norm(lda_model.transform(dtm))
+
+
+def _get_topic_term
