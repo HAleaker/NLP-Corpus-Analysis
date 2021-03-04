@@ -26,4 +26,16 @@ def _get_doc_topic_dists(lda_model, dtm):
     return _row_norm(lda_model.transform(dtm))
 
 
-def _get_topic_term
+def _get_topic_term_dists(lda_model):
+    return _row_norm(lda_model.components_)
+
+
+def _get_vocab(id2term):
+    res = []
+    for i in sorted(id2term.keys()):
+        res.append(id2term[i])
+    return res
+
+
+def _extract_data(lda_model, dtm, id2term):
+  
