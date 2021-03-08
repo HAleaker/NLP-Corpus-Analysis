@@ -44,4 +44,10 @@ def _extract_data(lda_model, dtm, id2term):
     topic_term_dists = _get_topic_term_dists(lda_model)
 
     assert term_freqs.shape[0] == len(vocab), \
-        ('Term frequencies and vocabulary are of different s
+        ('Term frequencies and vocabulary are of different sizes, {} != {}.'
+         .format(term_freqs.shape[0], len(vocab)))
+
+    assert topic_term_dists.shape[1] == dtm.shape[1], \
+        ('Topic-term distributions and document-term matrix have different '
+         'number of columns, {} != {}.'
+         .f
