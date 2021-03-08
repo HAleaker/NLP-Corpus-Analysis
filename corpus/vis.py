@@ -38,4 +38,10 @@ def _get_vocab(id2term):
 
 
 def _extract_data(lda_model, dtm, id2term):
-  
+    vocab = _get_vocab(id2term)
+    doc_lengths = _get_doc_lengths(dtm)
+    term_freqs = _get_term_freqs(dtm)
+    topic_term_dists = _get_topic_term_dists(lda_model)
+
+    assert term_freqs.shape[0] == len(vocab), \
+        ('Term frequencies and vocabulary are of different s
