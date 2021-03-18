@@ -50,4 +50,8 @@ def _extract_data(lda_model, dtm, id2term):
     assert topic_term_dists.shape[1] == dtm.shape[1], \
         ('Topic-term distributions and document-term matrix have different '
          'number of columns, {} != {}.'
-         .f
+         .format(topic_term_dists.shape[1], len(vocab)))
+
+    # column dimensions of document-term matrix and topic-term distributions
+    # must match first before transforming to document-topic distributions
+    doc_topic_dists = _get_doc_t
