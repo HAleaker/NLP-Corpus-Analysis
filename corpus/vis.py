@@ -54,4 +54,13 @@ def _extract_data(lda_model, dtm, id2term):
 
     # column dimensions of document-term matrix and topic-term distributions
     # must match first before transforming to document-topic distributions
-    doc_topic_dists = _get_doc_t
+    doc_topic_dists = _get_doc_topic_dists(lda_model, dtm)
+
+    return {'vocab': vocab,
+            'doc_lengths': doc_lengths.tolist(),
+            'term_frequency': term_freqs.tolist(),
+            'doc_topic_dists': doc_topic_dists.tolist(),
+            'topic_term_dists': topic_term_dists.tolist()}
+
+
+def prepare(
