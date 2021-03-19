@@ -63,4 +63,11 @@ def _extract_data(lda_model, dtm, id2term):
             'topic_term_dists': topic_term_dists.tolist()}
 
 
-def prepare(
+def prepare(lda_model, dtm, id2term, **kwargs):
+    """Create Prepared Data from sklearn's LatentDirichletAllocation and
+    CountVectorizer.
+
+    Parameters
+    ----------
+    lda_model : sklearn.decomposition.LatentDirichletAllocation.
+        Latent Dirichlet Alloc
