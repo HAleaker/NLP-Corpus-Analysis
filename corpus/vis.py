@@ -70,4 +70,10 @@ def prepare(lda_model, dtm, id2term, **kwargs):
     Parameters
     ----------
     lda_model : sklearn.decomposition.LatentDirichletAllocation.
-        Latent Dirichlet Alloc
+        Latent Dirichlet Allocation model from sklearn fitted with `dtm`
+
+    dtm : array-like or sparse matrix, shape=(n_samples, n_features)
+        Document-term matrix used to fit on LatentDirichletAllocation model
+        (`lda_model`)
+
+    id2term: the <fea
