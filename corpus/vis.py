@@ -76,4 +76,17 @@ def prepare(lda_model, dtm, id2term, **kwargs):
         Document-term matrix used to fit on LatentDirichletAllocation model
         (`lda_model`)
 
-    id2term: the <fea
+    id2term: the <feature id>:<term word> dictionary
+
+    **kwargs: Keyword argument to be passed to pyLDAvis.prepare()
+
+
+    Returns
+    -------
+    prepared_data : PreparedData
+          the data structures used in the visualization
+
+
+    Example
+    --------
+    For examp
