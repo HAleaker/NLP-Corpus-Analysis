@@ -89,4 +89,11 @@ def prepare(lda_model, dtm, id2term, **kwargs):
 
     Example
     --------
-    For examp
+    For example usage please see this notebook:
+    http://nbviewer.ipython.org/github/bmabey/pyLDAvis/blob/master/notebooks/sklearn.ipynb
+
+    See
+    ------
+    See `pyLDAvis.prepare` for **kwargs.
+    """
+    opts = fp.merge(_extract_data(l
