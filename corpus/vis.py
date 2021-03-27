@@ -96,4 +96,5 @@ def prepare(lda_model, dtm, id2term, **kwargs):
     ------
     See `pyLDAvis.prepare` for **kwargs.
     """
-    opts = fp.merge(_extract_data(l
+    opts = fp.merge(_extract_data(lda_model, dtm, id2term), kwargs)
+    return lda.prepare(**opts)

@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+
+  pyramid:
+    image: eeacms/corpus:latest
+    ports:
+      - "8181:6543"
+    environment:
+      - REDIS_
