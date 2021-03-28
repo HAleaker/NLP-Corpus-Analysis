@@ -7,4 +7,13 @@ services:
     ports:
       - "8181:6543"
     environment:
-      - REDIS_
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - corpus-data:/corpus
+    command: sh -c "pserve production.ini"
+
+  worker:
+      image: eeacms/corpus:latest
+      command: sh -c "worker production.ini"
+      environment:
+        - REDIS_URL=redis://redis
