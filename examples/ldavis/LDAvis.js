@@ -318,3 +318,233 @@ var LDAvis = function(to_select, data_or_file_name) {
         // circle guide inspired from
         // http://www.nytimes.com/interactive/2012/02/13/us/politics/2013-budget-proposal-graphic.html?_r=0
         var circleGuide = function(rSize, size) {
+            d3.select("#" + leftPanelID).append("circle")
+                .attr('class', "circleGuide" + size)
+                .attr('r', rSize)
+                .attr('cx', cx)
+                .attr('cy', mdsheight + rSize)
+                .style('fill', 'none')
+                .style('stroke-dasharray', '2 2')
+                .style('stroke', '#999');
+            d3.select("#" + leftPanelID).append("line")
+                .attr('class', "lineGuide" + size)
+                .attr("x1", cx)
+                .attr("x2", cx2)
+                .attr("y1", mdsheight + 2 * rSize)
+                .attr("y2", mdsheight + 2 * rSize)
+                .style("stroke", "gray")
+                .style("opacity", 0.3);
+        };
+
+        circleGuide(newSmall, "Small");
+        circleGuide(newMedium, "Medium");
+        circleGuide(newLarge, "Large");
+
+        var defaultLabelSmall = "2%";
+        var defaultLabelMedium = "5%";
+        var defaultLabelLarge = "10%";
+
+        d3.select("#" + leftPanelID).append("text")
+            .attr("x", 10)
+            .attr("y", mdsheight - 10)
+            .attr('class', "circleGuideTitle")
+            .style("text-anchor", "left")
+            .style("fontWeight", "bold")
+            .text("Marginal topic distribtion");
+        d3.select("#" + leftPanelID).append("text")
+            .attr("x", cx2 + 10)
+            .attr("y", mdsheight + 2 * newSmall)
+            .attr('class', "circleGuideLabelSmall")
+            .style("text-anchor", "start")
+            .text(defaultLabelSmall);
+        d3.select("#" + leftPanelID).append("text")
+            .attr("x", cx2 + 10)
+            .attr("y", mdsheight + 2 * newMedium)
+            .attr('class', "circleGuideLabelMedium")
+            .style("text-anchor", "start")
+            .text(defaultLabelMedium);
+        d3.select("#" + leftPanelID).append("text")
+            .attr("x", cx2 + 10)
+            .attr("y", mdsheight + 2 * newLarge)
+            .attr('class', "circleGuideLabelLarge")
+            .style("text-anchor", "start")
+            .text(defaultLabelLarge);
+
+        // bind mdsData to the points in the left panel:
+        var points = mdsplot.selectAll("points")
+                .data(mdsData)
+                .enter();
+
+        // text to indicate topic
+        points.append("text")
+            .attr("class", "txt")
+            .attr("x", function(d) {
+                return (xScale(+d.x));
+            })
+            .attr("y", function(d) {
+                return (yScale(+d.y) + 4);
+            })
+            .attr("stroke", "black")
+            .attr("opacity", 1)
+            .style("text-anchor", "middle")
+            .style("font-size", "11px")
+            .style("fontWeight", 100)
+            .text(function(d) {
+                return d.topics;
+            });
+
+        // draw circles
+        points.append("circle")
+            .attr("class", "dot")
+            .style("opacity", 0.2)
+            .style("fill", color1)
+            .attr("r", function(d) {
+                //return (rScaleMargin(+d.Freq));
+                return (Math.sqrt((d.Freq/100)*mdswidth*mdsheight*circle_prop/Math.PI));
+            })
+            .attr("cx", function(d) {
+                return (xScale(+d.x));
+            })
+            .attr("cy", function(d) {
+                return (yScale(+d.y));
+            })
+            .attr("stroke", "black")
+            .attr("id", function(d) {
+                return (topicID + d.topics);
+            })
+            .on("mouseover", function(d) {
+                var old_topic = topicID + vis_state.topic;
+                if (vis_state.topic > 0 && old_topic != this.id) {
+                    topic_off(document.getElementById(old_topic));
+                }
+                topic_on(this);
+            })
+            .on("click", function(d) {
+                // prevent click event defined on the div container from firing
+                // http://bl.ocks.org/jasondavies/3186840
+                d3.event.stopPropagation();
+                var old_topic = topicID + vis_state.topic;
+                if (vis_state.topic > 0 && old_topic != this.id) {
+                    topic_off(document.getElementById(old_topic));
+                }
+                // make sure topic input box value and fragment reflects clicked selection
+                document.getElementById(topicID).value = vis_state.topic = d.topics;
+                state_save(true);
+                topic_on(this);
+            })
+            .on("mouseout", function(d) {
+                if (vis_state.topic != d.topics) topic_off(this);
+                if (vis_state.topic > 0) topic_on(document.getElementById(topicID + vis_state.topic));
+            });
+
+        svg.append("text")
+            .text("Intertopic Distance Map (via multidimensional scaling)")
+            .attr("x", mdswidth/2 + margin.left)
+            .attr("y", 30)
+            .style("font-size", "16px")
+            .style("text-anchor", "middle");
+
+        // establish layout and vars for bar chart
+        var barDefault2 = dat3.filter(function(d) {
+            return d.Category == "Default";
+        });
+
+        var y = d3.scale.ordinal()
+                .domain(barDefault2.map(function(d) {
+                    return d.Term;
+                }))
+                .rangeRoundBands([0, barheight], 0.15);
+        var x = d3.scale.linear()
+                .domain([1, d3.max(barDefault2, function(d) {
+                    return d.Total;
+                })])
+                .range([0, barwidth])
+                .nice();
+        var yAxis = d3.svg.axis()
+                .scale(y);
+
+        // Add a group for the bar chart
+        var chart = svg.append("g")
+                .attr("transform", "translate(" + +(mdswidth + margin.left + termwidth) + "," + 2 * margin.top + ")")
+                .attr("id", barFreqsID);
+
+        // bar chart legend/guide:
+        var barguide = {"width": 100, "height": 15};
+        d3.select("#" + barFreqsID).append("rect")
+            .attr("x", 0)
+            .attr("y", mdsheight + 10)
+            .attr("height", barguide.height)
+            .attr("width", barguide.width)
+            .style("fill", color1)
+            .attr("opacity", 0.4);
+        d3.select("#" + barFreqsID).append("text")
+            .attr("x", barguide.width + 5)
+            .attr("y", mdsheight + 10 + barguide.height/2)
+            .style("dominant-baseline", "middle")
+            .text("Overall term frequency");
+
+        d3.select("#" + barFreqsID).append("rect")
+            .attr("x", 0)
+            .attr("y", mdsheight + 10 + barguide.height + 5)
+            .attr("height", barguide.height)
+            .attr("width", barguide.width/2)
+            .style("fill", color2)
+            .attr("opacity", 0.8);
+        d3.select("#" + barFreqsID).append("text")
+            .attr("x", barguide.width/2 + 5)
+            .attr("y", mdsheight + 10 + (3/2)*barguide.height + 5)
+            .style("dominant-baseline", "middle")
+            .text("Estimated term frequency within the selected topic");
+
+        // footnotes:
+        d3.select("#" + barFreqsID)
+            .append("a")
+            .attr("xlink:href", "http://vis.stanford.edu/files/2012-Termite-AVI.pdf")
+            .attr("target", "_blank")
+            .append("text")
+            .attr("x", 0)
+            .attr("y", mdsheight + 10 + (6/2)*barguide.height + 5)
+            .style("dominant-baseline", "middle")
+            .text("1. saliency(term w) = frequency(w) * [sum_t p(t | w) * log(p(t | w)/p(t))] for topics t; see Chuang et. al (2012)");
+        d3.select("#" + barFreqsID)
+            .append("a")
+            .attr("xlink:href", "http://nlp.stanford.edu/events/illvi2014/papers/sievert-illvi2014.pdf")
+            .attr("target", "_blank")
+            .append("text")
+            .attr("x", 0)
+            .attr("y", mdsheight + 10 + (8/2)*barguide.height + 5)
+            .style("dominant-baseline", "middle")
+            .text("2. relevance(term w | topic t) = \u03BB * p(w | t) + (1 - \u03BB) * p(w | t)/p(w); see Sievert & Shirley (2014)");
+
+        // Bind 'default' data to 'default' bar chart
+        var basebars = chart.selectAll(to_select + " .bar-totals")
+                .data(barDefault2)
+                .enter();
+
+        // Draw the gray background bars defining the overall frequency of each word
+        basebars
+            .append("rect")
+            .attr("class", "bar-totals")
+            .attr("x", 0)
+            .attr("y", function(d) {
+                return y(d.Term);
+            })
+            .attr("height", y.rangeBand())
+            .attr("width", function(d) {
+                return x(d.Total);
+            })
+            .style("fill", color1)
+            .attr("opacity", 0.4);
+
+        // Add word labels to the side of each bar
+        basebars
+            .append("text")
+            .attr("x", -5)
+            .attr("class", "terms")
+            .attr("y", function(d) {
+                return y(d.Term) + 12;
+            })
+            .attr("cursor", "pointer")
+            .attr("id", function(d) {
+                return (termID + d.Term);
+            })
