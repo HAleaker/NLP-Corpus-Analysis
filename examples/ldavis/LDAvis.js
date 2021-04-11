@@ -548,3 +548,248 @@ var LDAvis = function(to_select, data_or_file_name) {
             .attr("id", function(d) {
                 return (termID + d.Term);
             })
+            .style("text-anchor", "end") // right align text - use 'middle' for center alignment
+            .text(function(d) {
+                return d.Term;
+            })
+            .on("mouseover", function() {
+                term_hover(this);
+            })
+        // .on("click", function(d) {
+        //     var old_term = termID + vis_state.term;
+        //     if (vis_state.term != "" && old_term != this.id) {
+        //         term_off(document.getElementById(old_term));
+        //     }
+        //     vis_state.term = d.Term;
+        //     state_save(true);
+        //     term_on(this);
+        //     debugger;
+        // })
+            .on("mouseout", function() {
+                vis_state.term = "";
+                term_off(this);
+                state_save(true);
+            });
+
+        var title = chart.append("text")
+                .attr("x", barwidth/2)
+                .attr("y", -30)
+                .attr("class", "bubble-tool") //  set class so we can remove it when highlight_off is called
+                .style("text-anchor", "middle")
+                .style("font-size", "16px")
+                .text("Top-" + R + " Most Salient Terms");
+
+        title.append("tspan")
+            .attr("baseline-shift", "super")
+            .attr("font-size", "12px")
+            .text("(1)");
+
+        // barchart axis adapted from http://bl.ocks.org/mbostock/1166403
+        var xAxis = d3.svg.axis().scale(x)
+                .orient("top")
+                .tickSize(-barheight)
+                .tickSubdivide(true)
+                .ticks(6);
+
+        chart.attr("class", "xaxis")
+            .call(xAxis);
+
+        // dynamically create the topic and lambda input forms at the top of the page:
+        function init_forms(topicID, lambdaID, visID) {
+
+            // create container div for topic and lambda input:
+            var inputDiv = document.createElement("div");
+            inputDiv.setAttribute("id", topID);
+            inputDiv.setAttribute("style", "width: 1210px"); // to match the width of the main svg element
+            document.getElementById(visID).appendChild(inputDiv);
+
+            // topic input container:
+            var topicDiv = document.createElement("div");
+            topicDiv.setAttribute("style", "padding: 5px; background-color: #e8e8e8; display: inline-block; width: " + mdswidth + "px; height: 50px; float: left");
+            inputDiv.appendChild(topicDiv);
+
+            var topicLabel = document.createElement("label");
+            topicLabel.setAttribute("for", topicID);
+            topicLabel.setAttribute("style", "font-family: sans-serif; font-size: 14px");
+            topicLabel.innerHTML = "Selected Topic: <span id='" + topicID + "-value'></span>";
+            topicDiv.appendChild(topicLabel);
+
+            var topicInput = document.createElement("input");
+            topicInput.setAttribute("style", "width: 50px");
+            topicInput.type = "text";
+            topicInput.min = "0";
+            topicInput.max = K; // assumes the data has already been read in
+            topicInput.step = "1";
+            topicInput.value = "0"; // a value of 0 indicates no topic is selected
+            topicInput.id = topicID;
+            topicDiv.appendChild(topicInput);
+
+            var previous = document.createElement("button");
+            previous.setAttribute("id", topicDown);
+            previous.setAttribute("style", "margin-left: 5px");
+            previous.innerHTML = "Previous Topic";
+            topicDiv.appendChild(previous);
+
+            var next = document.createElement("button");
+            next.setAttribute("id", topicUp);
+            next.setAttribute("style", "margin-left: 5px");
+            next.innerHTML = "Next Topic";
+            topicDiv.appendChild(next);
+
+            var clear = document.createElement("button");
+            clear.setAttribute("id", topicClear);
+            clear.setAttribute("style", "margin-left: 5px");
+            clear.innerHTML = "Clear Topic";
+            topicDiv.appendChild(clear);
+
+            // lambda inputs
+            //var lambdaDivLeft = 8 + mdswidth + margin.left + termwidth;
+            var lambdaDivWidth = barwidth;
+            var lambdaDiv = document.createElement("div");
+            lambdaDiv.setAttribute("id", lambdaInputID);
+            lambdaDiv.setAttribute("style", "padding: 5px; background-color: #e8e8e8; display: inline-block; height: 50px; width: " + lambdaDivWidth + "px; float: right; margin-right: 30px");
+            inputDiv.appendChild(lambdaDiv);
+
+            var lambdaZero = document.createElement("div");
+            lambdaZero.setAttribute("style", "padding: 5px; height: 20px; width: 220px; font-family: sans-serif; float: left");
+            lambdaZero.setAttribute("id", lambdaZeroID);
+            lambdaDiv.appendChild(lambdaZero);
+            var xx = d3.select("#" + lambdaZeroID)
+                    .append("text")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .style("font-size", "14px")
+                    .text("Slide to adjust relevance metric:");
+            var yy = d3.select("#" + lambdaZeroID)
+                    .append("text")
+                    .attr("x", 125)
+                    .attr("y", -5)
+                    .style("font-size", "10px")
+                    .style("position", "absolute")
+                    .text("(2)");
+
+            var sliderDiv = document.createElement("div");
+            sliderDiv.setAttribute("id", sliderDivID);
+            sliderDiv.setAttribute("style", "padding: 5px; height: 40px; width: 250px; float: right; margin-top: -5px; margin-right: 10px");
+            lambdaDiv.appendChild(sliderDiv);
+
+            var lambdaInput = document.createElement("input");
+            lambdaInput.setAttribute("style", "width: 250px; margin-left: 0px; margin-right: 0px");
+            lambdaInput.type = "range";
+            lambdaInput.min = 0;
+            lambdaInput.max = 1;
+            lambdaInput.step = data['lambda.step'];
+            lambdaInput.value = vis_state.lambda;
+            lambdaInput.id = lambdaID;
+            lambdaInput.setAttribute("list", "ticks"); // to enable automatic ticks (with no labels, see below)
+            sliderDiv.appendChild(lambdaInput);
+
+            var lambdaLabel = document.createElement("label");
+            lambdaLabel.setAttribute("id", lambdaLabelID);
+            lambdaLabel.setAttribute("for", lambdaID);
+            lambdaLabel.setAttribute("style", "height: 20px; width: 60px; font-family: sans-serif; font-size: 14px; margin-left: 80px");
+            lambdaLabel.innerHTML = "&#955 = <span id='" + lambdaID + "-value'>" + vis_state.lambda + "</span>";
+            lambdaDiv.appendChild(lambdaLabel);
+
+            // Create the svg to contain the slider scale:
+            var scaleContainer = d3.select("#" + sliderDivID).append("svg")
+                    .attr("width", 250)
+                    .attr("height", 25);
+
+            var sliderScale = d3.scale.linear()
+                    .domain([0, 1])
+                    .range([7.5, 242.5])  // trimmed by 7.5px on each side to match the input type=range slider:
+                    .nice();
+
+            // adapted from http://bl.ocks.org/mbostock/1166403
+            var sliderAxis = d3.svg.axis()
+                    .scale(sliderScale)
+                    .orient("bottom")
+                    .tickSize(10)
+                    .tickSubdivide(true)
+                    .ticks(6);
+
+            // group to contain the elements of the slider axis:
+            var sliderAxisGroup = scaleContainer.append("g")
+                    .attr("class", "slideraxis")
+                    .attr("margin-top", "-10px")
+                    .call(sliderAxis);
+
+            // Another strategy for tick marks on the slider; simpler, but not labels
+            // var sliderTicks = document.createElement("datalist");
+            // sliderTicks.setAttribute("id", "ticks");
+            // for (var tick = 0; tick <= 10; tick++) {
+            //     var tickOption = document.createElement("option");
+            //     //tickOption.value = tick/10;
+            //     tickOption.innerHTML = tick/10;
+            //     sliderTicks.appendChild(tickOption);
+            // }
+            // append the forms to the containers
+            //lambdaDiv.appendChild(sliderTicks);
+
+        }
+
+        // function to re-order the bars (gray and red), and terms:
+        function reorder_bars(increase) {
+            // grab the bar-chart data for this topic only:
+            var dat2 = lamData.filter(function(d) {
+                //return d.Category == "Topic" + Math.min(K, Math.max(0, vis_state.topic)) // fails for negative topic numbers...
+                return d.Category == "Topic" + vis_state.topic;
+            });
+            // define relevance:
+            for (var i = 0; i < dat2.length; i++) {
+                dat2[i].relevance = vis_state.lambda * dat2[i].logprob +
+                    (1 - vis_state.lambda) * dat2[i].loglift;
+            }
+
+            // sort by relevance:
+            dat2.sort(fancysort("relevance"));
+
+            // truncate to the top R tokens:
+            var dat3 = dat2.slice(0, R);
+
+            var y = d3.scale.ordinal()
+                    .domain(dat3.map(function(d) {
+                        return d.Term;
+                    }))
+                    .rangeRoundBands([0, barheight], 0.15);
+            var x = d3.scale.linear()
+                    .domain([1, d3.max(dat3, function(d) {
+                        return d.Total;
+                    })])
+                    .range([0, barwidth])
+                    .nice();
+
+            // Change Total Frequency bars
+            var graybars = d3.select("#" + barFreqsID)
+                    .selectAll(to_select + " .bar-totals")
+                    .data(dat3, function(d) {
+                        return d.Term;
+                    });
+
+            // Change word labels
+            var labels = d3.select("#" + barFreqsID)
+                    .selectAll(to_select + " .terms")
+                    .data(dat3, function(d) {
+                        return d.Term;
+                    });
+
+            // Create red bars (drawn over the gray ones) to signify the frequency under the selected topic
+            var redbars = d3.select("#" + barFreqsID)
+                    .selectAll(to_select + " .overlay")
+                    .data(dat3, function(d) {
+                        return d.Term;
+                    });
+
+            // adapted from http://bl.ocks.org/mbostock/1166403
+            var xAxis = d3.svg.axis().scale(x)
+                    .orient("top")
+                    .tickSize(-barheight)
+                    .tickSubdivide(true)
+                    .ticks(6);
+
+            // New axis definition:
+            var newaxis = d3.selectAll(to_select + " .xaxis");
+
+            // define the new elements to enter:
+            var graybarsEnter = graybars.enter().append("rect")
