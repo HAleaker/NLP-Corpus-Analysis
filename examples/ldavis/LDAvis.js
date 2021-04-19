@@ -793,3 +793,266 @@ var LDAvis = function(to_select, data_or_file_name) {
 
             // define the new elements to enter:
             var graybarsEnter = graybars.enter().append("rect")
+                    .attr("class", "bar-totals")
+                    .attr("x", 0)
+                    .attr("y", function(d) {
+                        return y(d.Term) + barheight + margin.bottom + 2 * rMax;
+                    })
+                    .attr("height", y.rangeBand())
+                    .style("fill", color1)
+                    .attr("opacity", 0.4);
+
+            var labelsEnter = labels.enter()
+                    .append("text")
+                    .attr("x", -5)
+                    .attr("class", "terms")
+                    .attr("y", function(d) {
+                        return y(d.Term) + 12 + barheight + margin.bottom + 2 * rMax;
+                    })
+                    .attr("cursor", "pointer")
+                    .style("text-anchor", "end")
+                    .attr("id", function(d) {
+                        return (termID + d.Term);
+                    })
+                    .text(function(d) {
+                        return d.Term;
+                    })
+                    .on("mouseover", function() {
+                        term_hover(this);
+                    })
+            // .on("click", function(d) {
+            //     var old_term = termID + vis_state.term;
+            //     if (vis_state.term != "" && old_term != this.id) {
+            //     term_off(document.getElementById(old_term));
+            //     }
+            //     vis_state.term = d.Term;
+            //     state_save(true);
+            //     term_on(this);
+            // })
+                    .on("mouseout", function() {
+                        vis_state.term = "";
+                        term_off(this);
+                        state_save(true);
+                    });
+
+            var redbarsEnter = redbars.enter().append("rect")
+                    .attr("class", "overlay")
+                    .attr("x", 0)
+                    .attr("y", function(d) {
+                        return y(d.Term) + barheight + margin.bottom + 2 * rMax;
+                    })
+                    .attr("height", y.rangeBand())
+                    .style("fill", color2)
+                    .attr("opacity", 0.8);
+
+
+            if (increase) {
+                graybarsEnter
+                    .attr("width", function(d) {
+                        return x(d.Total);
+                    })
+                    .transition().duration(duration)
+                    .delay(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term);
+                    });
+                labelsEnter
+                    .transition().duration(duration)
+                    .delay(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term) + 12;
+                    });
+                redbarsEnter
+                    .attr("width", function(d) {
+                        return x(d.Freq);
+                    })
+                    .transition().duration(duration)
+                    .delay(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term);
+                    });
+
+                graybars.transition().duration(duration)
+                    .attr("width", function(d) {
+                        return x(d.Total);
+                    })
+                    .transition().duration(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term);
+                    });
+                labels.transition().duration(duration)
+                    .delay(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term) + 12;
+                    });
+                redbars.transition().duration(duration)
+                    .attr("width", function(d) {
+                        return x(d.Freq);
+                    })
+                    .transition().duration(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term);
+                    });
+
+                // Transition exiting rectangles to the bottom of the barchart:
+                graybars.exit()
+                    .transition().duration(duration)
+                    .attr("width", function(d) {
+                        return x(d.Total);
+                    })
+                    .transition().duration(duration)
+                    .attr("y", function(d, i) {
+                        return barheight + margin.bottom + 6 + i * 18;
+                    })
+                    .remove();
+                labels.exit()
+                    .transition().duration(duration)
+                    .delay(duration)
+                    .attr("y", function(d, i) {
+                        return barheight + margin.bottom + 18 + i * 18;
+                    })
+                    .remove();
+                redbars.exit()
+                    .transition().duration(duration)
+                    .attr("width", function(d) {
+                        return x(d.Freq);
+                    })
+                    .transition().duration(duration)
+                    .attr("y", function(d, i) {
+                        return barheight + margin.bottom + 6 + i * 18;
+                    })
+                    .remove();
+                // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
+                newaxis.transition().duration(duration)
+                    .call(xAxis)
+                    .transition().duration(duration);
+            } else {
+                graybarsEnter
+                    .attr("width", 100) // FIXME by looking up old width of these bars
+                    .transition().duration(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term);
+                    })
+                    .transition().duration(duration)
+                    .attr("width", function(d) {
+                        return x(d.Total);
+                    });
+                labelsEnter
+                    .transition().duration(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term) + 12;
+                    });
+                redbarsEnter
+                    .attr("width", 50) // FIXME by looking up old width of these bars
+                    .transition().duration(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term);
+                    })
+                    .transition().duration(duration)
+                    .attr("width", function(d) {
+                        return x(d.Freq);
+                    });
+
+                graybars.transition().duration(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term);
+                    })
+                    .transition().duration(duration)
+                    .attr("width", function(d) {
+                        return x(d.Total);
+                    });
+                labels.transition().duration(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term) + 12;
+                    });
+                redbars.transition().duration(duration)
+                    .attr("y", function(d) {
+                        return y(d.Term);
+                    })
+                    .transition().duration(duration)
+                    .attr("width", function(d) {
+                        return x(d.Freq);
+                    });
+
+                // Transition exiting rectangles to the bottom of the barchart:
+                graybars.exit()
+                    .transition().duration(duration)
+                    .attr("y", function(d, i) {
+                        return barheight + margin.bottom + 6 + i * 18 + 2 * rMax;
+                    })
+                    .remove();
+                labels.exit()
+                    .transition().duration(duration)
+                    .attr("y", function(d, i) {
+                        return barheight + margin.bottom + 18 + i * 18 + 2 * rMax;
+                    })
+                    .remove();
+                redbars.exit()
+                    .transition().duration(duration)
+                    .attr("y", function(d, i) {
+                        return barheight + margin.bottom + 6 + i * 18 + 2 * rMax;
+                    })
+                    .remove();
+
+                // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
+                newaxis.transition().duration(duration)
+                    .transition().duration(duration)
+                    .call(xAxis);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////
+
+        // function to update bar chart when a topic is selected
+        // the circle argument should be the appropriate circle element
+        function topic_on(circle) {
+            if (circle == null) return null;
+
+            // grab data bound to this element
+            var d = circle.__data__;
+            var Freq = Math.round(d.Freq * 10) / 10,
+                topics = d.topics;
+
+            // change opacity and fill of the selected circle
+            circle.style.opacity = highlight_opacity;
+            circle.style.fill = color2;
+
+            // Remove 'old' bar chart title
+            var text = d3.select(to_select + " .bubble-tool");
+            text.remove();
+
+            // append text with info relevant to topic of interest
+            d3.select("#" + barFreqsID)
+                .append("text")
+                .attr("x", barwidth/2)
+                .attr("y", -30)
+                .attr("class", "bubble-tool") //  set class so we can remove it when highlight_off is called
+                .style("text-anchor", "middle")
+                .style("font-size", "16px")
+                .text("Top-" + R + " Most Relevant Terms for Topic " + topics + " (" + Freq + "% of tokens)");
+
+            // grab the bar-chart data for this topic only:
+            var dat2 = lamData.filter(function(d) {
+                return d.Category == "Topic" + topics;
+            });
+
+            // define relevance:
+            for (var i = 0; i < dat2.length; i++) {
+                dat2[i].relevance = lambda.current * dat2[i].logprob +
+                    (1 - lambda.current) * dat2[i].loglift;
+            }
+
+            // sort by relevance:
+            dat2.sort(fancysort("relevance"));
+
+            // truncate to the top R tokens:
+            var dat3 = dat2.slice(0, R);
+
+            // scale the bars to the top R terms:
+            var y = d3.scale.ordinal()
+                    .domain(dat3.map(function(d) {
+                        return d.Term;
+                    }))
+                    .rangeRoundBands([0, barheight], 0.15);
+            var x = d3.scale.linear()
+                    .domain([1, d3.max(dat3, function(d) {
