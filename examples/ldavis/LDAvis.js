@@ -1056,3 +1056,257 @@ var LDAvis = function(to_select, data_or_file_name) {
                     .rangeRoundBands([0, barheight], 0.15);
             var x = d3.scale.linear()
                     .domain([1, d3.max(dat3, function(d) {
+                        return d.Total;
+                    })])
+                    .range([0, barwidth])
+                    .nice();
+
+            // remove the red bars if there are any:
+            d3.selectAll(to_select + " .overlay").remove();
+
+            // Change Total Frequency bars
+            d3.selectAll(to_select + " .bar-totals")
+                .data(dat3)
+                .attr("x", 0)
+                .attr("y", function(d) {
+                    return y(d.Term);
+                })
+                .attr("height", y.rangeBand())
+                .attr("width", function(d) {
+                    return x(d.Total);
+                })
+                .style("fill", color1)
+                .attr("opacity", 0.4);
+
+            // Change word labels
+            d3.selectAll(to_select + " .terms")
+                .data(dat3)
+                .attr("x", -5)
+                .attr("y", function(d) {
+                    return y(d.Term) + 12;
+                })
+                .attr("id", function(d) {
+                    return (termID + d.Term);
+                })
+                .style("text-anchor", "end") // right align text - use 'middle' for center alignment
+                .text(function(d) {
+                    return d.Term;
+                });
+
+            // Create red bars (drawn over the gray ones) to signify the frequency under the selected topic
+            d3.select("#" + barFreqsID).selectAll(to_select + " .overlay")
+                .data(dat3)
+                .enter()
+                .append("rect")
+                .attr("class", "overlay")
+                .attr("x", 0)
+                .attr("y", function(d) {
+                    return y(d.Term);
+                })
+                .attr("height", y.rangeBand())
+                .attr("width", function(d) {
+                    return x(d.Freq);
+                })
+                .style("fill", color2)
+                .attr("opacity", 0.8);
+
+            // adapted from http://bl.ocks.org/mbostock/1166403
+            var xAxis = d3.svg.axis().scale(x)
+                    .orient("top")
+                    .tickSize(-barheight)
+                    .tickSubdivide(true)
+                    .ticks(6);
+
+            // redraw x-axis
+            d3.selectAll(to_select + " .xaxis")
+            //.attr("class", "xaxis")
+                .call(xAxis);
+        }
+
+
+        function topic_off(circle) {
+            if (circle == null) return circle;
+            // go back to original opacity/fill
+            circle.style.opacity = base_opacity;
+            circle.style.fill = color1;
+
+            var title = d3.selectAll(to_select + " .bubble-tool")
+                    .text("Top-" + R + " Most Salient Terms");
+            title.append("tspan")
+                .attr("baseline-shift", "super")
+                .attr("font-size", 12)
+                .text(1);
+
+            // remove the red bars
+            d3.selectAll(to_select + " .overlay").remove();
+
+            // go back to 'default' bar chart
+            var dat2 = lamData.filter(function(d) {
+                return d.Category == "Default";
+            });
+
+            var y = d3.scale.ordinal()
+                    .domain(dat2.map(function(d) {
+                        return d.Term;
+                    }))
+                    .rangeRoundBands([0, barheight], 0.15);
+            var x = d3.scale.linear()
+                    .domain([1, d3.max(dat2, function(d) {
+                        return d.Total;
+                    })])
+                    .range([0, barwidth])
+                    .nice();
+
+            // Change Total Frequency bars
+            d3.selectAll(to_select + " .bar-totals")
+                .data(dat2)
+                .attr("x", 0)
+                .attr("y", function(d) {
+                    return y(d.Term);
+                })
+                .attr("height", y.rangeBand())
+                .attr("width", function(d) {
+                    return x(d.Total);
+                })
+                .style("fill", color1)
+                .attr("opacity", 0.4);
+
+            //Change word labels
+            d3.selectAll(to_select + " .terms")
+                .data(dat2)
+                .attr("x", -5)
+                .attr("y", function(d) {
+                    return y(d.Term) + 12;
+                })
+                .style("text-anchor", "end") // right align text - use 'middle' for center alignment
+                .text(function(d) {
+                    return d.Term;
+                });
+
+            // adapted from http://bl.ocks.org/mbostock/1166403
+            var xAxis = d3.svg.axis().scale(x)
+                    .orient("top")
+                    .tickSize(-barheight)
+                    .tickSubdivide(true)
+                    .ticks(6);
+
+            // redraw x-axis
+            d3.selectAll(to_select + " .xaxis")
+                .attr("class", "xaxis")
+                .call(xAxis);
+        }
+
+        // event definition for mousing over a term
+        function term_hover(term) {
+            var old_term = termID + vis_state.term;
+            if (vis_state.term != "" && old_term != term.id) {
+                term_off(document.getElementById(old_term));
+            }
+            vis_state.term = term.innerHTML;
+            term_on(term);
+            state_save(true);
+        }
+        // updates vis when a term is selected via click or hover
+        function term_on(term) {
+            if (term == null) return null;
+            term.style["fontWeight"] = "bold";
+            var d = term.__data__;
+            var Term = d.Term;
+            var dat2 = mdsData3.filter(function(d2) {
+                return d2.Term == Term;
+            });
+
+            var k = dat2.length; // number of topics for this token with non-zero frequency
+
+            var radius = [];
+            for (var i = 0; i < K; ++i) {
+                radius[i] = 0;
+            }
+            for (i = 0; i < k; i++) {
+                radius[dat2[i].Topic - 1] = dat2[i].Freq;
+            }
+
+            var size = [];
+            for (var i = 0; i < K; ++i) {
+                size[i] = 0;
+            }
+            for (i = 0; i < k; i++) {
+                // If we want to also re-size the topic number labels, do it here
+                // 11 is the default, so leaving this as 11 won't change anything.
+                size[dat2[i].Topic - 1] = 11;
+            }
+
+            var rScaleCond = d3.scale.sqrt()
+                    .domain([0, 1]).range([0, rMax]);
+
+            // Change size of bubbles according to the word's distribution over topics
+            d3.selectAll(to_select + " .dot")
+                .data(radius)
+                .transition()
+                .attr("r", function(d) {
+                    //return (rScaleCond(d));
+                    return (Math.sqrt(d*mdswidth*mdsheight*word_prop/Math.PI));
+                });
+
+            // re-bind mdsData so we can handle multiple selection
+            d3.selectAll(to_select + " .dot")
+                .data(mdsData);
+
+            // Change sizes of topic numbers:
+            d3.selectAll(to_select + " .txt")
+                .data(size)
+                .transition()
+                .style("font-size", function(d) {
+                    return +d;
+                });
+
+            // Alter the guide
+            d3.select(to_select + " .circleGuideTitle")
+                .text("Conditional topic distribution given term = '" + term.innerHTML + "'");
+        }
+
+        function term_off(term) {
+            if (term == null) return null;
+            term.style["fontWeight"] = "normal";
+
+            d3.selectAll(to_select + " .dot")
+                .data(mdsData)
+                .transition()
+                .attr("r", function(d) {
+                    //return (rScaleMargin(+d.Freq));
+                    return (Math.sqrt((d.Freq/100)*mdswidth*mdsheight*circle_prop/Math.PI));
+                });
+
+            // Change sizes of topic numbers:
+            d3.selectAll(to_select + " .txt")
+                .transition()
+                .style("font-size", "11px");
+
+            // Go back to the default guide
+            d3.select(to_select + " .circleGuideTitle")
+                .text("Marginal topic distribution");
+            d3.select(to_select + " .circleGuideLabelLarge")
+                .text(defaultLabelLarge);
+            d3.select(to_select + " .circleGuideLabelSmall")
+                .attr("y", mdsheight + 2 * newSmall)
+                .text(defaultLabelSmall);
+            d3.select(to_select + " .circleGuideSmall")
+                .attr("r", newSmall)
+                .attr("cy", mdsheight + newSmall);
+            d3.select(to_select + " .lineGuideSmall")
+                .attr("y1", mdsheight + 2 * newSmall)
+                .attr("y2", mdsheight + 2 * newSmall);
+        }
+
+
+        // serialize the visualization state using fragment identifiers -- http://en.wikipedia.org/wiki/Fragment_identifier
+        // location.hash holds the address information
+
+        var params = location.hash.split("&");
+        if (params.length > 1) {
+            vis_state.topic = params[0].split("=")[1];
+            vis_state.lambda = params[1].split("=")[1];
+            vis_state.term = params[2].split("=")[1];
+
+            // Idea: write a function to parse the URL string
+            // only accept values in [0,1] for lambda, {0, 1, ..., K} for topics (any string is OK for term)
