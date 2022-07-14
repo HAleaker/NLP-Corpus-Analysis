@@ -21,4 +21,10 @@ if(typeof(LDAvis) !== "undefined"){
    // already loaded: just create the visualization
    !function(LDAvis){
        new LDAvis("#" + "ldavis_el181400486183401688389054262", ldavis_el181400486183401688389054262_data);
- 
+   }(LDAvis);
+}else if(typeof define === "function" && define.amd){
+   // require.js is available: use it to load d3/LDAvis
+   require.config({paths: {d3: "/d3"}});
+   require(["d3"], function(d3){
+      window.d3 = d3;
+      LDAvis_load_lib("/LD
