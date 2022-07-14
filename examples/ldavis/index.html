@@ -14,4 +14,11 @@ function LDAvis_load_lib(url, callback){
   s.async = true;
   s.onreadystatechange = s.onload = callback;
   s.onerror = function(){console.warn("failed to load library " + url);};
-  document.getElementsByTagName(
+  document.getElementsByTagName("head")[0].appendChild(s);
+}
+
+if(typeof(LDAvis) !== "undefined"){
+   // already loaded: just create the visualization
+   !function(LDAvis){
+       new LDAvis("#" + "ldavis_el181400486183401688389054262", ldavis_el181400486183401688389054262_data);
+ 
