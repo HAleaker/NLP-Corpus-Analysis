@@ -27,4 +27,10 @@ if(typeof(LDAvis) !== "undefined"){
    require.config({paths: {d3: "/d3"}});
    require(["d3"], function(d3){
       window.d3 = d3;
-      LDAvis_load_lib("/LD
+      LDAvis_load_lib("/LDAvis.js", function(){
+        new LDAvis("#" + "ldavis_el181400486183401688389054262", ldavis_el181400486183401688389054262_data);
+      });
+    });
+}else{
+    // require.js not available: dynamically load d3 & LDAvis
+    L
