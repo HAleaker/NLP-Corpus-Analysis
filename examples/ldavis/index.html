@@ -33,4 +33,10 @@ if(typeof(LDAvis) !== "undefined"){
     });
 }else{
     // require.js not available: dynamically load d3 & LDAvis
-    L
+    LDAvis_load_lib("/d3.js", function(){
+         LDAvis_load_lib("/LDAvis.js", function(){
+                 new LDAvis("#" + "ldavis_el181400486183401688389054262", ldavis_el181400486183401688389054262_data);
+            })
+         });
+}
+</script></body></html>
