@@ -15,4 +15,9 @@ import rq_dashboard
 logger = logging.getLogger('eea.corpus')
 
 
-def redis_conn
+def redis_connection():
+    redis_uri = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+    p = parse.urlparse(redis_uri)
+    host, port = p.netloc.split(':')
+    db = len(p.path) > 1 and p.path[1:] or '0'
+    conn = Redis(host=host, port=port, db=
