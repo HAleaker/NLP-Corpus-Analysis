@@ -20,4 +20,19 @@ def redis_connection():
     p = parse.urlparse(redis_uri)
     host, port = p.netloc.split(':')
     db = len(p.path) > 1 and p.path[1:] or '0'
-    conn = Redis(host=host, port=port, db=
+    conn = Redis(host=host, port=port, db=db)
+    return conn
+
+
+def make_queue(name='default'):
+    queue = Queue(connection=redis_connection())
+    return queue
+
+
+queue = make_queue()
+
+
+@click.command()
+@click.argument('config_uri')
+def worker(config_uri):
+    """ Console entry script that start
