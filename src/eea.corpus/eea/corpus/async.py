@@ -35,4 +35,12 @@ queue = make_queue()
 @click.command()
 @click.argument('config_uri')
 def worker(config_uri):
-    """ Console entry script that start
+    """ Console entry script that starts a worker process
+    """
+    # TODO: import spacy's model to share it between workers
+
+    pyramid_env = bootstrap(config_uri)
+
+    # this conflicts with normal worker output
+    # TODO: solve logging for the console
+    # Setu
