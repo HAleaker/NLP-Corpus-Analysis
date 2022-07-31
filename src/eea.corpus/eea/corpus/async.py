@@ -61,4 +61,12 @@ def dashboard(global_config, **settings):
     """ WSGI entry point for the Flask app RQ Dashboard
     """
 
-    redis_uri = os.environ.get('REDIS_URL', 'redis://
+    redis_uri = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+    p = parse.urlparse(redis_uri)
+    host, port = p.netloc.split(':')
+    db = len(p.path) > 1 and p.path[1:] or '0'
+
+    redis_settings = {
+        'REDIS_URL': redis_uri,
+        'REDIS_DB': db,
+        'REDIS_HOST': host
