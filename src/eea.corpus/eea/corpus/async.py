@@ -51,4 +51,14 @@ def worker(config_uri):
         qs = ['default']
         conn = redis_connection()
         with Connection(conn):
-            w =
+            w = Worker(qs)
+            w.work()
+    finally:
+        pyramid_env['closer']()
+
+
+def dashboard(global_config, **settings):
+    """ WSGI entry point for the Flask app RQ Dashboard
+    """
+
+    redis_uri = os.environ.get('REDIS_URL', 'redis://
