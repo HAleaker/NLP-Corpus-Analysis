@@ -43,4 +43,12 @@ def worker(config_uri):
 
     # this conflicts with normal worker output
     # TODO: solve logging for the console
-    # Setu
+    # Setup logging to allow log output from command methods
+    # from pyramid.paster import setup_logging
+    # setup_logging(config_uri)
+
+    try:
+        qs = ['default']
+        conn = redis_connection()
+        with Connection(conn):
+            w =
