@@ -69,4 +69,12 @@ def dashboard(global_config, **settings):
     redis_settings = {
         'REDIS_URL': redis_uri,
         'REDIS_DB': db,
-        'REDIS_HOST': host
+        'REDIS_HOST': host,
+        'REDIS_PORT': port,
+    }
+
+    app = Flask(__name__,
+                static_url_path="/static",
+                static_folder=resource_filename("rq_dashboard", "static")
+                )
+    app.config.from_object
