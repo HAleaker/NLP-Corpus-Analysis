@@ -77,4 +77,11 @@ def dashboard(global_config, **settings):
                 static_url_path="/static",
                 static_folder=resource_filename("rq_dashboard", "static")
                 )
-    app.config.from_object
+    app.config.from_object(rq_dashboard.default_settings)
+    app.config.update(redis_settings)
+    app.register_blueprint(rq_dashboard.blueprint)
+    return app.wsgi_app
+
+
+def get_assigned_job(phash_id):
+    """ Get the queued or processing job for this pipeline co
