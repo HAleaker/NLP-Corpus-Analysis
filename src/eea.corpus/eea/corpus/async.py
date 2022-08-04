@@ -94,4 +94,10 @@ def get_assigned_job(phash_id):
     try:
         jids = registry.get_job_ids()
     except ConnectionError:
-      
+        logger.warning("ConnectionError, could not get a list of job ids")
+        jids = []
+
+    for jid in jids:
+        job = queue.fetch_job(jid)
+        if phash_id == job.meta.get('phash_id'):
+            logger.info("Async job found %s", job.id
