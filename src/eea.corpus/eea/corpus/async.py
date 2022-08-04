@@ -100,4 +100,13 @@ def get_assigned_job(phash_id):
     for jid in jids:
         job = queue.fetch_job(jid)
         if phash_id == job.meta.get('phash_id'):
-            logger.info("Async job found %s", job.id
+            logger.info("Async job found %s", job.id)
+            return job
+
+    # Look for a queued job
+    try:
+        jobs = queue.get_jobs()
+    except ConnectionError:
+        logger.warning("ConnectionError, could not get a list of jobs")
+    jobs = []
+    for job in jobs:  # look for a job created for t
