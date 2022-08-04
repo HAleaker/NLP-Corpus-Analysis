@@ -84,4 +84,14 @@ def dashboard(global_config, **settings):
 
 
 def get_assigned_job(phash_id):
-    """ Get the queued or processing job for this pipeline co
+    """ Get the queued or processing job for this pipeline component processor
+
+    TODO: look into more registries
+    """
+
+    # First, look for an already started job
+    registry = StartedJobRegistry(queue.name, queue.connection)
+    try:
+        jids = registry.get_job_ids()
+    except ConnectionError:
+      
