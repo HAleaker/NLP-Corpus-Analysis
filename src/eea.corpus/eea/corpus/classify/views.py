@@ -92,3 +92,20 @@ class CreateClassificationModelView(FormView):
             f.write('\n'.join(test_lines))
 
         print("Training model")
+        # model = fasttext.supervised()
+        import fasttext as ft
+        model = ft.supervised(input_file='/tmp/corpus-train.txt',
+                              output='/tmp/ftmodel', epoch=100)
+        print("Model trained")
+
+        # from sklearn import metrics
+        # self.score = metrics.accuracy_score(y_test, pred)
+
+        pred = model.predict(test_lines, k=2)
+        zz = list(zip(pred, y_test))
+        tt = [x for x in zz if set(x[0]) != set(x[1])]
+        notok = len(tt)
+        self.score = notok * 100 / len(zz)
+        print("Score %s" % self.score)
+
+        # xx = model.predict_proba(test_lines, k=2)
