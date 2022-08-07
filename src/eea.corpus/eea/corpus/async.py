@@ -109,4 +109,7 @@ def get_assigned_job(phash_id):
     except ConnectionError:
         logger.warning("ConnectionError, could not get a list of jobs")
     jobs = []
-    for job in jobs:  # look for a job created for t
+    for job in jobs:  # look for a job created for this model
+        if job.meta['phash_id'] == phash_id:
+            logger.info("Async job found %s", job.id)
+            return job
