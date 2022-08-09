@@ -34,3 +34,10 @@ def train_model(corpus):
     docs = [doc.text for doc in docs_stream]
 
     from sklearn.feature_extraction.text import CountVectorizer
+    vect = CountVectorizer(input='content', strip_accents='unicode',
+                           tokenizer=tokenizer,  # stop_words='english',
+                           max_features=5000)
+
+    X = vect.fit_transform(docs)
+
+   
