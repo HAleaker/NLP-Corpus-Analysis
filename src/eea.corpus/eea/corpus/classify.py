@@ -26,4 +26,11 @@ def train_model(corpus):
     from sklearn.model_selection import train_test_split
     from itertools import tee
 
-    docs = (doc for doc in corpu
+    docs = (doc for doc in corpus
+            if not isinstance(doc.metadata['Category Path'], float))
+    docs_stream, meta_stream = tee(docs, 2)
+
+    print("Transforming docs")
+    docs = [doc.text for doc in docs_stream]
+
+    from sklearn.feature_extraction.text import CountVectorizer
