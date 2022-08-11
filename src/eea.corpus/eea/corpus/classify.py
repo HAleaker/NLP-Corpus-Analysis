@@ -51,4 +51,10 @@ def train_model(corpus):
     # X = vect.fit_transform(docs)
 
     # from sklearn.ensemble import RandomForestClassifier
-    # model = RandomForestClassifier(n_estimator
+    # model = RandomForestClassifier(n_estimators=100)    # acc: 0.73
+
+    # from sklearn import svm
+    # model = svm.SVC(kernel='poly', degree=3, C=1.0)     # acc: 0.66
+
+    # from sklearn.naive_bayes import MultinomialNB       # acc: 0.73
+    # model = MultinomialNB(alpha=0.1)        
