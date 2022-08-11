@@ -46,4 +46,9 @@ def train_model(corpus):
     # X = X.toarray()   # only needed for GDC
 
     # from sklearn.feature_extraction.text import TfidfVectorizer
-    # vect = TfidfV
+    # vect = TfidfVectorizer(max_features=5000,
+    #                        ngram_range=(1, 3), sublinear_tf=True)
+    # X = vect.fit_transform(docs)
+
+    # from sklearn.ensemble import RandomForestClassifier
+    # model = RandomForestClassifier(n_estimator
