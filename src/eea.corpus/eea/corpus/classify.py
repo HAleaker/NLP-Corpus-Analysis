@@ -40,4 +40,10 @@ def train_model(corpus):
 
     X = vect.fit_transform(docs)
 
-   
+    from sklearn.feature_extraction.text import TfidfTransformer
+    transf = TfidfTransformer()
+    X = transf.fit_transform(X)
+    # X = X.toarray()   # only needed for GDC
+
+    # from sklearn.feature_extraction.text import TfidfVectorizer
+    # vect = TfidfV
