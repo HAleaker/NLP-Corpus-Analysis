@@ -57,4 +57,8 @@ def train_model(corpus):
     # model = svm.SVC(kernel='poly', degree=3, C=1.0)     # acc: 0.66
 
     # from sklearn.naive_bayes import MultinomialNB       # acc: 0.73
-    # model = MultinomialNB(alpha=0.1)        
+    # model = MultinomialNB(alpha=0.1)        # , fit_prior=True
+
+    # takes a long time, can go higher if more estimators, higher l_rate
+    # from sklearn.ensemble import GradientBoostingClassifier   # acc: 0.65
+    # model = GradientBoostingClassifier(n_estimators=10,learni
