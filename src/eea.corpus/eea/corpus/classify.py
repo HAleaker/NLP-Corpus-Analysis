@@ -61,4 +61,11 @@ def train_model(corpus):
 
     # takes a long time, can go higher if more estimators, higher l_rate
     # from sklearn.ensemble import GradientBoostingClassifier   # acc: 0.65
-    # model = GradientBoostingClassifier(n_estimators=10,learni
+    # model = GradientBoostingClassifier(n_estimators=10,learning_rate=0.1)
+
+    # 0.763 with tfidf from countvect 5000, 0.7 without tfidf
+    from sklearn.linear_model import LogisticRegression
+    model = LogisticRegression()
+
+    vocab = ClassVocab()
+    y = [vocab[doc.metadata['Category Path']] for doc i
