@@ -78,4 +78,9 @@ def train_model(corpus):
     model.fit(X_train, y_train)
 
     print("Fitting model")
-    model.fit(X_
+    model.fit(X_train, y_train)
+    print("done")
+
+    pred = model.predict(X_test)
+    score = metrics.accuracy_score(y_test, pred)
+    print(score)
