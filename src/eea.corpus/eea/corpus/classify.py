@@ -68,4 +68,14 @@ def train_model(corpus):
     model = LogisticRegression()
 
     vocab = ClassVocab()
-    y = [vocab[doc.metadata['Category Path']] for doc i
+    y = [vocab[doc.metadata['Category Path']] for doc in meta_stream]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.1, random_state=3311)
+
+    print("Training on %s docs" % str(X_train.shape))
+
+    model.fit(X_train, y_train)
+
+    print("Fitting model")
+    model.fit(X_
