@@ -10,4 +10,12 @@ from eea.corpus.processing.utils import (component_phash_id,
                                          get_pipeline_for_component)
 from pandas import read_csv
 
-# con
+# container for registered pipeline components
+pipeline_registry = OrderedDict()
+
+Processor = namedtuple('Processor',
+                       ['name', 'schema', 'process', 'title', 'actions'])
+
+
+def pipeline_component(schema, title, actions=None):
+    """
