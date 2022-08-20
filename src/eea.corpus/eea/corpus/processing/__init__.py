@@ -18,4 +18,9 @@ Processor = namedtuple('Processor',
 
 
 def pipeline_component(schema, title, actions=None):
-    """
+    """ Register a processing function as a pipeline component, with a schema
+
+    A pipeline component is two pieces:
+
+    * a ``process(content, **kwargs)`` function that performs any needed
+    transformation on the input c
