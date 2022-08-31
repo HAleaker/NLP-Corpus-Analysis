@@ -28,4 +28,11 @@ def pipeline_component(schema, title, actions=None):
     ``register`` function call
 
     Additionally, an ``actions`` mapping can be passed, where the keys are
-    button names and the values are functions that wi
+    button names and the values are functions that will handle requests. They
+    can be used to handle special cases that can't be foreseen by the main form
+    views.
+
+    Use such as:
+
+        class SomeSettingsSchema(colander.Schema):
+            count = colander.SchemaNode(colander.I
