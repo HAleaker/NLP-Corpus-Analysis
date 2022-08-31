@@ -23,4 +23,9 @@ def pipeline_component(schema, title, actions=None):
     A pipeline component is two pieces:
 
     * a ``process(content, **kwargs)`` function that performs any needed
-    transformation on the input c
+    transformation on the input content.
+    * a schema that will provide the necessary parameters values for the
+    ``register`` function call
+
+    Additionally, an ``actions`` mapping can be passed, where the keys are
+    button names and the values are functions that wi
