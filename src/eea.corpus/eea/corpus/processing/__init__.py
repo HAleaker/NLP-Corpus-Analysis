@@ -35,4 +35,11 @@ def pipeline_component(schema, title, actions=None):
     Use such as:
 
         class SomeSettingsSchema(colander.Schema):
-            count = colander.SchemaNode(colander.I
+            count = colander.SchemaNode(colander.Int)
+
+        @pipeline_component(schema=SomeSettingsSchema, title='Generic Pipe',
+                            actions={'handle_': handle})
+        def process(content, **settings):
+            for doc in content:
+                # do something
+     
