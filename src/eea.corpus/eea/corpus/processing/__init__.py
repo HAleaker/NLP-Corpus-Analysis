@@ -42,4 +42,12 @@ def pipeline_component(schema, title, actions=None):
         def process(content, **settings):
             for doc in content:
                 # do something
-     
+                yield doc
+
+    """
+
+    # This outer function works as a factory for the decorator, to be able to
+    # have a closure with parameters for the decorator. The function below is
+    # the real decorator
+
+    # The trick of the venusian librar
