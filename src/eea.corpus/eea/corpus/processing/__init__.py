@@ -53,4 +53,8 @@ def pipeline_component(schema, title, actions=None):
     # The trick of the venusian library is that the decorator, by default,
     # doesn't do anything. It just returns the decorated function. But we
     # register a callback for the venusian scanning process that, once the
-    # 'scanning' process is completed (or, r
+    # 'scanning' process is completed (or, rather, the full application is in
+    # use), the decorator will start doing what's inside the callback.
+    #
+    # For the simplified decorator, we just embellish the schema with the
+    # required machinery fields, then act as a pass through fo
