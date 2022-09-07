@@ -50,4 +50,7 @@ def pipeline_component(schema, title, actions=None):
     # have a closure with parameters for the decorator. The function below is
     # the real decorator
 
-    # The trick of the venusian librar
+    # The trick of the venusian library is that the decorator, by default,
+    # doesn't do anything. It just returns the decorated function. But we
+    # register a callback for the venusian scanning process that, once the
+    # 'scanning' process is completed (or, r
