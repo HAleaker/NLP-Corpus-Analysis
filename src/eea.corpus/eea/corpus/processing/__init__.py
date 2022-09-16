@@ -76,4 +76,14 @@ def pipeline_component(schema, title, actions=None):
                     colander.String(),
                     widget=deform.widget.HiddenWidget(),
                     default=uid,
-         
+                    missing=uid,
+                )
+
+            p = Processor(uid, WrappedSchema, func, title, actions=[])
+            pipeline_registry[uid] = p
+
+            return func
+
+        venusian.attach(process, callback)
+
+        return process
