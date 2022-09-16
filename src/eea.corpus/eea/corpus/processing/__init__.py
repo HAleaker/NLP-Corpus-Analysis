@@ -62,4 +62,11 @@ def pipeline_component(schema, title, actions=None):
 
     # TODO: do we really need full venusian to be able to benefit from scan?
     # TODO; can we simplify the schema wrapping process? Inheriance with
-    # a "hidden" class seems overkill, but also we don't
+    # a "hidden" class seems overkill, but also we don't want to modify, "in
+    # place" the original schema, because that can be reused.
+
+    def decorator(process):
+        uid = '_'.join((process.__module__,
+                        process.__name__)).replace('.', '_')
+
+        def callback(scanner, name
