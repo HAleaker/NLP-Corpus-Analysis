@@ -57,4 +57,9 @@ def pipeline_component(schema, title, actions=None):
     # use), the decorator will start doing what's inside the callback.
     #
     # For the simplified decorator, we just embellish the schema with the
-    # required machinery fields, then act as a pass through fo
+    # required machinery fields, then act as a pass through for the original
+    # function
+
+    # TODO: do we really need full venusian to be able to benefit from scan?
+    # TODO; can we simplify the schema wrapping process? Inheriance with
+    # a "hidden" class seems overkill, but also we don't
