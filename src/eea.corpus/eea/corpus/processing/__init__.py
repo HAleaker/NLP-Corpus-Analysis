@@ -69,4 +69,11 @@ def pipeline_component(schema, title, actions=None):
         uid = '_'.join((process.__module__,
                         process.__name__)).replace('.', '_')
 
-        def callback(scanner, name
+        def callback(scanner, name, func):
+
+            class WrappedSchema(schema):
+                schema_type = colander.SchemaNode(
+                    colander.String(),
+                    widget=deform.widget.HiddenWidget(),
+                    default=uid,
+         
