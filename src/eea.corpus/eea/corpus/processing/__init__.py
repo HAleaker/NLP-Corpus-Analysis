@@ -103,4 +103,12 @@ def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
     stream mode, processing incoming data (and yielding "lines" of content) or
     it can read all the input stream and then yield content.
 
-    The yielded con
+    The yielded content can be statements, documents, etc.
+
+    """
+    document_path = upload_location(file_name)
+    df = read_csv(document_path)
+
+    cs = iter(df[text_column])
+    df = df[df.columns.difference([text_column])]
+    ms = (dict(zip(df.keys(), row)) for row in df.v
