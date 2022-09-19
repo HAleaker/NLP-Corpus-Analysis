@@ -99,4 +99,8 @@ def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
     * should read a stream of data
     * should yield a stream of data
 
-    Inside,
+    Inside, it has absolute control over the processing. It can either act in
+    stream mode, processing incoming data (and yielding "lines" of content) or
+    it can read all the input stream and then yield content.
+
+    The yielded con
