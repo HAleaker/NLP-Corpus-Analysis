@@ -87,3 +87,16 @@ def pipeline_component(schema, title, actions=None):
         venusian.attach(process, callback)
 
         return process
+
+    return decorator
+
+
+def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
+    """ Runs file through pipeline and returns result
+
+    A pipeline component:
+
+    * should read a stream of data
+    * should yield a stream of data
+
+    Inside,
