@@ -111,4 +111,14 @@ def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
 
     cs = iter(df[text_column])
     df = df[df.columns.difference([text_column])]
-    ms = (dict(zip(df.keys(), row)) for row in df.v
+    ms = (dict(zip(df.keys(), row)) for row in df.values)
+    stream = zip_longest(cs, ms)
+
+    content_stream = (
+        dict(text=text, metadata=meta) for text, meta in stream
+        # strip rows where there's no text
+
+        if text and isinstance(text, str)
+    )
+
+    env = {
