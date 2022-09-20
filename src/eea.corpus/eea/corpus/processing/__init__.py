@@ -129,4 +129,14 @@ def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
         # True if the pipeline is being previewed
         'preview_mode': preview_mode,
 
-        # schema name of the current step allows processors to recon
+        # schema name of the current step allows processors to reconstitute
+        # previous pipeline steps
+        'step_id': None,
+    }
+    # if not preview_mode:
+    #     import pdb; pdb.set_trace()
+
+    for (component_name, step_id, kwargs) in pipeline:
+        env['step_id'] = step_id
+
+        # cal
