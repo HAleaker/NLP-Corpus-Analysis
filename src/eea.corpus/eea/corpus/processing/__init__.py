@@ -122,3 +122,11 @@ def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
     )
 
     env = {
+        'file_name': file_name,
+        'text_column': text_column,
+        'pipeline': pipeline,
+
+        # True if the pipeline is being previewed
+        'preview_mode': preview_mode,
+
+        # schema name of the current step allows processors to recon
