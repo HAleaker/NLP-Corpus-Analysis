@@ -151,4 +151,8 @@ def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
         process = component.process
         content_stream = process(content_stream, env, **kwargs)
 
-    return content_str
+    return content_stream
+
+
+def includeme(config):      # pragma: no cover
+    config.include('.phrases')
