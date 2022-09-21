@@ -143,4 +143,12 @@ def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
         # this pottentially allows processors to use a cache, if needed
         step_pipeline = get_pipeline_for_component(env)
         phash_id = component_phash_id(
-            file_name, text_co
+            file_name, text_column, step_pipeline
+        )
+        env['phash_id'] = phash_id
+
+        component = pipeline_registry[component_name]
+        process = component.process
+        content_stream = process(content_stream, env, **kwargs)
+
+    return content_str
