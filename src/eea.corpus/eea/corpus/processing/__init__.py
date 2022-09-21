@@ -139,4 +139,8 @@ def build_pipeline(file_name, text_column, pipeline, preview_mode=True):
     for (component_name, step_id, kwargs) in pipeline:
         env['step_id'] = step_id
 
-        # cal
+        # calculate a hash of current + previous pipeline steps
+        # this pottentially allows processors to use a cache, if needed
+        step_pipeline = get_pipeline_for_component(env)
+        phash_id = component_phash_id(
+            file_name, text_co
