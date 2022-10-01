@@ -18,4 +18,11 @@ class LimitResults(Schema):
         default=10,
         missing=10,
         title='Results limit',
-        description='
+        description='Set to 0 if you want unlimited results',
+    )
+
+
+@pipeline_component(schema=LimitResults,
+                    title="Limit number of results")
+def process(content, env, **settings):
+    count = int(settings.get('max_count', 10))
