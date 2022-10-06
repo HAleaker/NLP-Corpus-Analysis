@@ -26,3 +26,8 @@ class LimitResults(Schema):
                     title="Limit number of results")
 def process(content, env, **settings):
     count = int(settings.get('max_count', 10))
+    if not count:
+        yield from content
+    else:
+        content = islice(content, 0, count)
+        yield from content
