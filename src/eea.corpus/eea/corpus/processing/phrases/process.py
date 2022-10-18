@@ -154,3 +154,12 @@ def cached_phrases(content, env, settings):
     # TODO: should not do from_iterable. This collapses the docs to sentences
     # and distorts the result stream
     """
+    base_path = corpus_base_path(env['file_name'])
+    files = phrase_model_files(base_path, env['phash_id'])
+
+    if not files:
+        raise StopIteration
+
+    logger.info("Phrase processor: using phrase models from %s", base_path)
+
+    yield from use_phrase_models(content, files, settings)
