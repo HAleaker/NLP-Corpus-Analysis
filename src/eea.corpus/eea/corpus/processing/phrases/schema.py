@@ -9,4 +9,10 @@ class PhraseFinder(Schema):
     """ Schema for the phrases finder
     """
 
-    widget = PhraseFinderWi
+    widget = PhraseFinderWidget()       # overrides the default template
+    description = "Find and process phrases in text."
+
+    MODES = (
+        ('tokenize', 'Tokenize phrases in text'),
+        ('append', 'Append phrases to text'),
+        ('replace', 'Replace all text with found phrases
