@@ -15,4 +15,19 @@ class PhraseFinder(Schema):
     MODES = (
         ('tokenize', 'Tokenize phrases in text'),
         ('append', 'Append phrases to text'),
-        ('replace', 'Replace all text with found phrases
+        ('replace', 'Replace all text with found phrases')
+    )
+
+    SCORING = (
+        ('default', 'Default'),
+        ('npmi', 'NPMI: Slower, better with common words'),
+    )
+
+    LEVELS = (
+        (2, 'Bigrams'),
+        (3, 'Trigrams'),
+        (4, 'Quadgrams'),
+    )
+
+    mode = colander.SchemaNode(
+        coland
