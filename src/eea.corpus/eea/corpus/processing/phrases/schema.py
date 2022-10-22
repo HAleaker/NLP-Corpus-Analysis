@@ -38,4 +38,10 @@ class PhraseFinder(Schema):
         widget=deform.widget.RadioChoiceWidget(values=MODES)
     )
 
-    leve
+    level = colander.SchemaNode(
+        colander.Int(),
+        default=LEVELS[0][0],
+        missing=LEVELS[0][0],
+        title='N-gram level',
+        widget=deform.widget.RadioChoiceWidget(values=LEVELS),
+        description='How many words to include in phrase det
