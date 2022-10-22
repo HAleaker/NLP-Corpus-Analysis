@@ -30,4 +30,12 @@ class PhraseFinder(Schema):
     )
 
     mode = colander.SchemaNode(
-        coland
+        colander.String(),
+        validator=colander.OneOf([x[0] for x in MODES]),
+        default=MODES[0][0],
+        missing=MODES[0][0],
+        title="Operating mode",
+        widget=deform.widget.RadioChoiceWidget(values=MODES)
+    )
+
+    leve
