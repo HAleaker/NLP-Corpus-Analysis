@@ -44,4 +44,16 @@ class PhraseFinder(Schema):
         missing=LEVELS[0][0],
         title='N-gram level',
         widget=deform.widget.RadioChoiceWidget(values=LEVELS),
-        description='How many words to include in phrase det
+        description='How many words to include in phrase detection',
+    )
+
+    min_count = colander.SchemaNode(
+        colander.Int(),
+        default=5,
+        missing=5,
+        title='Minimum number',
+        description='Ignore all words with total count lower then this',
+    )
+
+    threshold = colander.SchemaNode(
+   
