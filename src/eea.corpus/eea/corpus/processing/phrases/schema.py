@@ -56,4 +56,12 @@ class PhraseFinder(Schema):
     )
 
     threshold = colander.SchemaNode(
-   
+        colander.Float(),
+        default=10.0,
+        missing=10.0,
+        title='Threshold',
+        description='Score threshold for forming phrases. Higher means '
+                    'fewer phrases.',
+    )
+
+    scoring = colander.SchemaNode
