@@ -64,4 +64,11 @@ class PhraseFinder(Schema):
                     'fewer phrases.',
     )
 
-    scoring = colander.SchemaNode
+    scoring = colander.SchemaNode(
+        colander.String(),
+        validator=colander.OneOf([x[0] for x in SCORING]),
+        default=SCORING[0][0],
+        missing=SCORING[0][0],
+        title="Scoring algorithm",
+        widget=deform.widget.RadioChoiceWidget(values=SCORING)
+    )
