@@ -31,4 +31,9 @@ def phrase_model_status(request):
             'status': 'OK'
         }
 
-    job 
+    job = get_assigned_job(phash_id)
+    status = job and ('preview_%s' % job.get_status()) or 'unavailable'
+
+    return {
+        'status': status
+    }
