@@ -20,3 +20,10 @@ default_resource_registry.set_js_resources(
 class PhraseFinderWidget(MappingWidget):
     """ Mapping widget with custom template
 
+    Template customizations:
+
+        * frame color based on phrase model status
+        * the reload button is disabled/enabled based on live phrase model
+          status
+        * there is an AJAX js script that queries job status and updates the
+ 
