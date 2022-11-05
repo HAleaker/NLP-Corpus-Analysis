@@ -26,4 +26,11 @@ class PhraseFinderWidget(MappingWidget):
         * the reload button is disabled/enabled based on live phrase model
           status
         * there is an AJAX js script that queries job status and updates the
- 
+          widget status indicators (frame color, reload preview button)
+    """
+
+    template = 'phrase_form'
+    requirements = (('phrase-widget', None),)
+
+    def get_template_values(self, field, cstruct, kw):
+        """ Inserts the job status and preview status into template va
