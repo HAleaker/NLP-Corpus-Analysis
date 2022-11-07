@@ -33,4 +33,13 @@ class PhraseFinderWidget(MappingWidget):
     requirements = (('phrase-widget', None),)
 
     def get_template_values(self, field, cstruct, kw):
-        """ Inserts the job status and preview status into template va
+        """ Inserts the job status and preview status into template values
+        """
+        values = super(PhraseFinderWidget, self).\
+            get_template_values(field, cstruct, kw)
+
+        values['job_status'] = 'preview_not_available'
+
+        req = get_current_request()
+
+        # TODO: can we refactor this so that we compute the pi
