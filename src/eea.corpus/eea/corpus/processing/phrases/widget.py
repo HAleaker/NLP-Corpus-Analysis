@@ -42,4 +42,10 @@ class PhraseFinderWidget(MappingWidget):
 
         req = get_current_request()
 
-        # TODO: can we refactor this so that we compute the pi
+        # TODO: can we refactor this so that we compute the pipeline hash
+        # in the pipeline building function?
+        pstruct = req.create_corpus_pipeline_struct.copy()
+        pstruct['step_id'] = field.schema.name
+        phash_id = component_phash_id(
+            file_name=pstruct['file_name'],
+            text_
