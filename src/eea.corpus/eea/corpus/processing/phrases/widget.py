@@ -48,4 +48,11 @@ class PhraseFinderWidget(MappingWidget):
         pstruct['step_id'] = field.schema.name
         phash_id = component_phash_id(
             file_name=pstruct['file_name'],
-            text_
+            text_column=pstruct['text_column'],
+            pipeline=get_pipeline_for_component(pstruct)
+        )
+        values['phash_id'] = phash_id
+
+        logger.info("Phrase widget: need phrase model id %s", phash_id)
+
+        # Calculate the initial "panel statu
