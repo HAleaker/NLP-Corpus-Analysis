@@ -61,4 +61,10 @@ class PhraseFinderWidget(MappingWidget):
         cpath = os.path.join(base_path, '%s.phras' % phash_id)
 
         for f in os.listdir(base_path):
-            if f.startswith(cp
+            if f.startswith(cpath):    # it's an ngram model
+                logger.info("Phrase widget: found a phrase model at %s", cpath)
+                values['job_status'] = 'preview_available'
+
+                return values
+
+        # look for a job created
