@@ -55,4 +55,10 @@ class PhraseFinderWidget(MappingWidget):
 
         logger.info("Phrase widget: need phrase model id %s", phash_id)
 
-        # Calculate the initial "panel statu
+        # Calculate the initial "panel status" to assign a status color to this
+        # widget
+        base_path = corpus_base_path(pstruct['file_name'])
+        cpath = os.path.join(base_path, '%s.phras' % phash_id)
+
+        for f in os.listdir(base_path):
+            if f.startswith(cp
