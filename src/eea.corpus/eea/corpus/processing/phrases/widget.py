@@ -67,4 +67,10 @@ class PhraseFinderWidget(MappingWidget):
 
                 return values
 
-        # look for a job created
+        # look for a job created for this model
+        job = get_assigned_job(phash_id)
+
+        if job is not None:
+            values['job_status'] = 'preview_' + job.get_status()
+
+        return values
