@@ -73,3 +73,43 @@ class TextacyPreprocess(Schema):
     no_punct = SchemaNode(
         Bool(),
         default=True,
+        missing=False,
+        title="No punctuation",
+        label="Remove all punctuation (replace with empty string)."
+    )
+    no_contractions = SchemaNode(
+        Bool(),
+        default=True,
+        missing=False,
+        title="No contractions",
+        label="Replace English contractions with their unshortened forms."
+    )
+    no_accents = SchemaNode(
+        Bool(),
+        default=True,
+        missing=False,
+        title="No accents",
+        label="Replace all accented characters with unaccented versions; "
+        "NB: if transliterate is True, this option is redundant."
+    )
+
+
+@pipeline_component(
+    schema=TextacyPreprocess,
+    title="Textacy Preprocessing"
+)
+def process(content, env, **settings):
+    for doc in content:
+        try:
+            text = doc['text']
+            text = preprocess_text(text, **settings)
+        except Exception:
+            logger.exception(
+                "Textacy Processor: got an error in extracting content: %r",
+                doc
+            )
+
+            continue
+
+        yield set_text(doc, text)
+        # yield {'text': text, 'metadata': doc['metadata']}
