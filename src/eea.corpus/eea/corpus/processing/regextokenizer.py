@@ -10,4 +10,13 @@ logger = logging.getLogger('eea.corpus')
 
 
 class RegexTokenizer(colander.Schema):
-    """ Schem
+    """ Schema for the Tokenizer processing.
+    """
+
+    description = "Use a regular expression to tokenize text"
+
+    regex = colander.SchemaNode(
+        colander.String(),
+        title="Regular expression",
+        missing="",
+    
