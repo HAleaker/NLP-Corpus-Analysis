@@ -26,4 +26,13 @@ class RegexTokenizer(colander.Schema):
 
 
 def tokenizer(text, regex):
-    """ Tokenizes text. Returns li
+    """ Tokenizes text. Returns lists of tokens (words)
+    """
+
+    return [x for x in re.findall(regex, text) if x]
+
+
+@pipeline_component(schema=RegexTokenizer,
+                    title="Regex based tokenizer")
+def process(content, env, **settings):
+    "
