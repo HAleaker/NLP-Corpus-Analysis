@@ -19,4 +19,11 @@ class RegexTokenizer(colander.Schema):
         colander.String(),
         title="Regular expression",
         missing="",
-    
+        # usable for tokenizing code, based on
+        # http://blog.aylien.com/source-code-classification-using-deep-learning
+        default=r'[\w\']+|[""!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~""\\]',
+    )
+
+
+def tokenizer(text, regex):
+    """ Tokenizes text. Returns li
