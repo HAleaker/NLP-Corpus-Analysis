@@ -46,4 +46,6 @@ def process(content, env, **settings):
         try:
             yield set_text(doc, text)
         except Exception:
-            logger.exception("
+            logger.exception("Error in converting to Doc %r", text)
+
+            continue
