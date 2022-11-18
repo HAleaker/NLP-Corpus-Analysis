@@ -35,4 +35,15 @@ def tokenizer(text, regex):
 @pipeline_component(schema=RegexTokenizer,
                     title="Regex based tokenizer")
 def process(content, env, **settings):
-    "
+    """ Tokenization
+    """
+
+    regex = settings['regex']
+
+    for doc in content:
+        text = " ".join(tokenizer(doc['text'], regex))
+
+        try:
+            yield set_text(doc, text)
+        except Exception:
+            logger.exception("
