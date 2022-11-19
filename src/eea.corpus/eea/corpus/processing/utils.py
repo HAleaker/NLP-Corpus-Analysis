@@ -1,0 +1,1 @@
+from eea.corpus.utils import hashed_id

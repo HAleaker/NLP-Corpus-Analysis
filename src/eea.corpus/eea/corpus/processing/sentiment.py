@@ -25,4 +25,8 @@ class Sentiment(Schema):
 @pipeline_component(schema=Sentiment,
                     title="WIP - Sentiment-based filter")
 def process(content, env, **settings):
-    tr =
+    tr = settings['threshold']
+    for doc in content:
+        st = doc.spacy_doc.sentiment
+        if st > tr:
+            yield doc
