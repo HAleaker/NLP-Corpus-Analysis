@@ -16,4 +16,13 @@ class Sentiment(Schema):
     threshold = SchemaNode(
         Float(),
         default=0.5,
-        missing=0
+        missing=0.5,
+        title='Results limit',
+        description='Set to 0 if you want unlimited results',
+    )
+
+
+@pipeline_component(schema=Sentiment,
+                    title="WIP - Sentiment-based filter")
+def process(content, env, **settings):
+    tr =
