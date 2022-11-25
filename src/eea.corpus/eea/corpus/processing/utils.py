@@ -19,4 +19,8 @@ def get_pipeline_for_component(env):
     """ Retrive all the pipeline steps that influence a processing component
 
     Normally a component not interested in the whole pipeline, it only needs
-    to take input, 
+    to take input, change input and yield output. In some cases (for example
+    the phrase detection), the processing component needs extended information
+    about the pipeline steps that come before it:
+
+        * it can compute a hash of its pipeline, for 
