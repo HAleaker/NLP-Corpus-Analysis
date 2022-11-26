@@ -23,4 +23,12 @@ def get_pipeline_for_component(env):
     the phrase detection), the processing component needs extended information
     about the pipeline steps that come before it:
 
-        * it can compute a hash of its pipeline, for 
+        * it can compute a hash of its pipeline, for caching purposes.
+        * the pipeline is used in the async phrase models generation
+    """
+
+    pipeline = []
+    for step in env['pipeline']:
+        pipeline.append(step)
+        if step[1] == env['step_id']:
+           
