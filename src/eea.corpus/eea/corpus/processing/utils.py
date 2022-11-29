@@ -31,4 +31,6 @@ def get_pipeline_for_component(env):
     for step in env['pipeline']:
         pipeline.append(step)
         if step[1] == env['step_id']:
-           
+            break
+
+    return pipeline
