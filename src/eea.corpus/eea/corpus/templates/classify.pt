@@ -1,4 +1,10 @@
 <div metal:use-macro="load: layout.pt">
 
   <div metal:fill-slot="sidebar-top"></div>
-  <di
+  <div metal:fill-slot="sidebar"></div>
+
+  <div metal:fill-slot="full-width">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Create a new classification model</h1>
+        <p>Set required parameters for the classific
