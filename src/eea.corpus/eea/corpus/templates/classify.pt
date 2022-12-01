@@ -1,0 +1,4 @@
+<div metal:use-macro="load: layout.pt">
+
+  <div metal:fill-slot="sidebar-top"></div>
+  <di
