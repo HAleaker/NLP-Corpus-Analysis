@@ -7,4 +7,16 @@
     <div class="row">
       <div class="col-md-12">
         <h1>Create a new classification model</h1>
-        <p>Set required parameters for the classific
+        <p>Set required parameters for the classification model</p>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-5" id="corpus-form">
+        <form tal:replace="structure form" ></form>
+      </div>
+
+      <div class="col-md-7">
+        <div class="content">
+          <h4>Preview r
