@@ -19,4 +19,11 @@
 
       <div class="col-md-7">
         <div class="content">
-          <h4>Preview r
+          <h4>Preview result</h4>
+          <p>Choose row and processing settings to preview results</p>
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+              Score: ${view.score}
+            </div>
+         
