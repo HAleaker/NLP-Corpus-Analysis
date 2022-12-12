@@ -1,4 +1,9 @@
 <form
   tal:define="style style|field.widget.style;
               css_class css_class|string:${field.widget.css_class or field.css_class or ''};
-              item_templat
+              item_template item_template|field.widget.item_template;
+              autocomplete autocomplete|field.autocomplete;
+              title title|field.title;
+              errormsg errormsg|field.errormsg;
+              description description|field.description;
+              buttons buttons|field.bu
