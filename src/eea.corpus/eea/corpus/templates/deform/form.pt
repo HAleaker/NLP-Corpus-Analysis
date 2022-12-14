@@ -12,4 +12,12 @@
               formid formid|field.formid;
               action action|field.action or None;
               method method|field.method;"
- 
+  tal:attributes="autocomplete autocomplete;
+                  style style;
+                  class css_class;
+                  action action;"
+  id="${formid}"
+  method="${method}"
+  enctype="multipart/form-data"
+  accept-charset="utf-8"
+  i18n:domain
