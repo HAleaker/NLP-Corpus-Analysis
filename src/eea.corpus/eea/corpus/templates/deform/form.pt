@@ -6,4 +6,10 @@
               title title|field.title;
               errormsg errormsg|field.errormsg;
               description description|field.description;
-              buttons buttons|field.bu
+              buttons buttons|field.buttons;
+              use_ajax use_ajax|field.use_ajax;
+              ajax_options ajax_options|field.ajax_options;
+              formid formid|field.formid;
+              action action|field.action or None;
+              method method|field.method;"
+ 
