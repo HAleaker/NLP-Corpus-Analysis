@@ -30,4 +30,8 @@
     <input type="hidden" name="_charset_" />
     <input type="hidden" name="__formid__" value="${formid}"/>
 
-    <div class="alert alert-danger" tal:condition="fi
+    <div class="alert alert-danger" tal:condition="field.error">
+      <div class="error-msg-lbl" i18n:translate=""
+        >There was a problem with your submission</div>
+      <div class="error-msg-detail" i18n:translate=""
+        >Errors have been highlighted b
