@@ -20,4 +20,14 @@
   method="${method}"
   enctype="multipart/form-data"
   accept-charset="utf-8"
-  i18n:domain
+  i18n:domain="deform"
+  >
+
+  <fieldset class="deform-form-fieldset">
+
+    <legend tal:condition="title">${title}</legend>
+
+    <input type="hidden" name="_charset_" />
+    <input type="hidden" name="__formid__" value="${formid}"/>
+
+    <div class="alert alert-danger" tal:condition="fi
