@@ -49,4 +49,10 @@
       <tal:loop tal:repeat="button buttons">
         <button
               tal:define="btn_disposition repeat.button.start and 'btn-primary' or 'btn-default';
-              btn_icon b
+              btn_icon button.icon|None"
+              tal:attributes="disabled button.disabled if button.disabled else None"
+              id="${formid+button.name}"
+              name="${button.name}"
+              type="${button.type}"
+              class="btn ${button.css_class or btn_disposition}"
+      
