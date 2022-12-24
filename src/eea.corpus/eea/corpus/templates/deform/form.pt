@@ -74,4 +74,9 @@
          replaceTarget: true,
          success: function() {
            deform.processCallbacks();
-           
+           deform.focusFirstInput(target);
+         },
+         beforeSerialize: function() {
+           // See http://bit.ly/1agBs9Z (hack to fix tinymce-related ajax bug)
+           if ('tinymce' in window) {
+             $(tinymce.get()).eac
