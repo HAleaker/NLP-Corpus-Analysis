@@ -65,4 +65,13 @@
   </fieldset>
 
   <script type="text/javascript" tal:condition="use_ajax">
-   deform.addCal
+   deform.addCallback(
+     '${formid}',
+     function(oid) {
+       var target = '#' + oid;
+       var options = {
+         target: target,
+         replaceTarget: true,
+         success: function() {
+           deform.processCallbacks();
+           
