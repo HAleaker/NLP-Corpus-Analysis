@@ -79,4 +79,12 @@
          beforeSerialize: function() {
            // See http://bit.ly/1agBs9Z (hack to fix tinymce-related ajax bug)
            if ('tinymce' in window) {
-             $(tinymce.get()).eac
+             $(tinymce.get()).each(
+               function(i, el) {
+                 var content = el.getContent();
+                 var editor_input = document.getElementById(el.id);
+                 editor_input.value = content;
+             });
+           }
+         }
+     
