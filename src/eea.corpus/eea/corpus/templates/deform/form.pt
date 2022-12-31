@@ -87,4 +87,12 @@
              });
            }
          }
-     
+       };
+       var extra_options = ${ajax_options} || {};
+       $('#' + oid).ajaxForm($.extend(options, extra_options));
+     }
+   );
+  </script>
+
+</form>
+
