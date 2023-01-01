@@ -11,4 +11,12 @@
     title="${description}">
     <div class="panel-heading">
       <strong>${title}</strong>
-      <div c
+      <div class="btn-toolbar pull-right" role="toolbar">
+        <div class="btn-group">
+          <input
+             type="hidden"
+             class="_phash_id"
+             name="phash-${field.schema.name}"
+             value="${phash_id}" />
+
+  
