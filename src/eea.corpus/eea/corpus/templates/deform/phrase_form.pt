@@ -2,4 +2,13 @@
   description description|field.description;
   errormsg errormsg|field.errormsg;
   item_template item_template|field.widget.item_template;
-  panel_status job_status
+  panel_status job_status == 'OK' and 'panel-success' or 'panel-danger';
+  "
+  i18n:domain="deform">
+
+  <div
+    class="panel ${panel_status} collapsed-form phrase-component-form"
+    title="${description}">
+    <div class="panel-heading">
+      <strong>${title}</strong>
+      <div c
