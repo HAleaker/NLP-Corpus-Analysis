@@ -19,4 +19,9 @@
              name="phash-${field.schema.name}"
              value="${phash_id}" />
 
-  
+             <!-- style="display:none" -->
+          <button
+             name="preview"
+             title="Reload"
+             class="button-reload btn btn-sm btn-warning disabled">
+            <span class="glyphicon glyphicon
