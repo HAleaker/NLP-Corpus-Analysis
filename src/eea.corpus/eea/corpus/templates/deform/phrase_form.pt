@@ -1,0 +1,5 @@
+<tal:def tal:define="title title|field.title;
+  description description|field.description;
+  errormsg errormsg|field.errormsg;
+  item_template item_template|field.widget.item_template;
+  panel_status job_status
