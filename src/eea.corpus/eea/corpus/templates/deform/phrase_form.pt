@@ -33,4 +33,9 @@
           <button
             name="move_up_${field.schema.name}_success"
             title="Move up this pipeline component"
-            clas
+            class="btn btn-sm btn-default">
+            <span class="glyphicon glyphicon-arrow-up"></span>
+          </button>
+          <button
+            name="move_down_${field.schema.name}_success"
+            title="Move down this pipeline compone
