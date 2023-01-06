@@ -24,4 +24,13 @@
              name="preview"
              title="Reload"
              class="button-reload btn btn-sm btn-warning disabled">
-            <span class="glyphicon glyphicon
+            <span class="glyphicon glyphicon-repeat glyph-spinner"></span>
+          </button>
+
+        </div>
+
+        <div class="btn-group">
+          <button
+            name="move_up_${field.schema.name}_success"
+            title="Move up this pipeline component"
+            clas
