@@ -45,4 +45,10 @@
           <button
             name="remove_${field.schema.name}_success"
             title="Remove this pipeline component"
-       
+            class="btn btn-sm btn-default">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </div>
+        <div class="btn-group">
+          <button
+            class="btn btn-sm btn-default collapse
