@@ -51,4 +51,11 @@
         </div>
         <div class="btn-group">
           <button
-            class="btn btn-sm btn-default collapse
+            class="btn btn-sm btn-default collapse-button"
+            type="button"
+            data-toggle="collapse"
+            href="#collapsed-${field.schema.name}"
+            aria-expanded="false"
+            aria-controls="collapsed-${field.schema.name}"
+            >
+    
