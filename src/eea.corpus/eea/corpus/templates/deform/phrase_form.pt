@@ -58,4 +58,12 @@
             aria-expanded="false"
             aria-controls="collapsed-${field.schema.name}"
             >
-    
+            <i class="glyphicon glyphicon-chevron-left"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel-body collapse" id="collapsed-${field.schema.name}">
+      <div tal:condition="errormsg" class=
