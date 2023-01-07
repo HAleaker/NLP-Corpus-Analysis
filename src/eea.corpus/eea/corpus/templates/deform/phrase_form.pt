@@ -66,4 +66,13 @@
     </div>
 
     <div class="panel-body collapse" id="collapsed-${field.schema.name}">
-      <div tal:condition="errormsg" class=
+      <div tal:condition="errormsg" class="clearfix alert alert-danger">
+        <p i18n:translate="">
+          There was a problem with this section
+        </p>
+        <p>${errormsg}</p>
+      </div>
+
+      <div tal:condition="description">
+        ${description}
+ 
