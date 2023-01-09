@@ -85,4 +85,9 @@
       <div tal:repeat="child field.children"
         tal:replace="structure child.render_template(item_template)" >
       </div>
-      ${fie
+      ${field.end_mapping()}
+
+    </div>
+  </div>
+
+</tal:def>
