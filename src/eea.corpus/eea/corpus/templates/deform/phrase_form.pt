@@ -75,4 +75,14 @@
 
       <div tal:condition="description">
         ${description}
- 
+      </div>
+
+      <div metal:define-slot="panel-content">
+        ${job_status}
+      </div>
+
+      ${field.start_mapping()}
+      <div tal:repeat="child field.children"
+        tal:replace="structure child.render_template(item_template)" >
+      </div>
+      ${fie
