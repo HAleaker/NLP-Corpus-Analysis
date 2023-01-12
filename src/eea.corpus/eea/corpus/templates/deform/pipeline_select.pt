@@ -20,4 +20,8 @@
       multiple multiple;
       size size;
       style style;">
-        <t
+        <tal:loop tal:repeat="item values">
+        <optgroup tal:condition="isinstance(item, optgroup_class)"
+                                            tal:attributes="label item.label">
+          <option tal:repeat="(value, description) item.options"
+        
