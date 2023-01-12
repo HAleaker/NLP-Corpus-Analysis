@@ -5,3 +5,11 @@
   size size|field.widget.size;
   css_class css_class|field.widget.css_class;
   unicode unicode|str;
+  optgroup_class optgroup_class|field.widget.optgroup_class;
+  multiple multiple|field.widget.multiple;"
+  tal:omit-tag="">
+
+  <div class="row">
+    <div class="col-xs-10">
+      <input type="hidden" name="__start__" value="${name}:sequence"
+     
