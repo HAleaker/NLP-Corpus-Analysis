@@ -27,4 +27,6 @@
                                             tal:attributes="
                                             selected python:field.widget.get_select_value(cstruct, value);
                                             class css_class;
-                                      
+                                            label field.widget.long_label_generator and description;
+                                            value value"
+                                            tal:content="field.widget.long_label_generator and field.widget.long_label_generato
