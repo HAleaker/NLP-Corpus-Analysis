@@ -29,4 +29,8 @@
                                             class css_class;
                                             label field.widget.long_label_generator and description;
                                             value value"
-                                            tal:content="field.widget.long_label_generator and field.widget.long_label_generato
+                                            tal:content="field.widget.long_label_generator and field.widget.long_label_generator(item.label, description) or description"/>
+        </optgroup>
+        <option tal:condition="not isinstance(item, optgroup_class)"
+                                            tal:attributes="
+                                            sele
