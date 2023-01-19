@@ -33,4 +33,8 @@
         </optgroup>
         <option tal:condition="not isinstance(item, optgroup_class)"
                                             tal:attributes="
-                                            sele
+                                            selected python:field.widget.get_select_value(cstruct, item[0]);
+                                            class css_class;
+                                            value item[0]">${item[1]}</option>
+        </tal:loop>
+      </select
