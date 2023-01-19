@@ -1,0 +1,65 @@
+
+<div metal:use-macro="load: layout.pt">
+  <div metal:fill-slot="full-width">
+
+    <div class="content">
+      <h1>
+        <span class="font-semi-bold">EEA</span>
+        <span class="smaller">Corpus Server</span>
+      </h1>
+
+      <p class="lead">A ML based <span class="font-normal">topic modeling</span> tool.</p>
+
+      <div tal:repeat="doc documents">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-8">
+                  <h4><strong class="panel-title">${doc.title}</strong></h4>
+                </div>
+                <div class="col-md-4">
+                  <a href="/process/${doc.name}/"
+                    class="btn btn-primary btn-sm pull-right">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    Transform and process corpus
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body" tal:condition="doc.corpuses">
+            <ul class="list-group" >
+              <li class="list-group-item" tal:repeat="corpus doc.corpuses">
+                <div class="btn-group pull-right">
+                  <form method="POST" action="/delete/${doc.name}/${corpus.corpus_id}">
+                    <button class="btn btn-secondary" >
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                  </form>
+                </div>
+                <div role="group">
+                  <h4>
+                    ${corpus.title}
+                  </h4>
+                  <a href="/topics/${doc.name}/${corpus.title}" >Topic Modeling</a>
+                  /
+                  <a href="/classify/${doc.name}/${corpus.corpus_id}">Classification</a>
+                  /
+                  <a href="/view/${doc.name}/${corpus.corpus_id}/0">View</a>
+
+                  <p class="discreet">
+                  ${corpus.description}
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

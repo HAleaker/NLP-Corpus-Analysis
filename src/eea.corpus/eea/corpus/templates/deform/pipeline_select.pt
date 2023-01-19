@@ -44,4 +44,5 @@
     <div class="col-xs-1">
       <button class="btn" name="${field.name}_button">Add</button>
     </div>
-  </di
+  </div>
+</div>
