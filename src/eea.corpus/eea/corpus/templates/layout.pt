@@ -85,3 +85,28 @@
             <div metal:define-slot="sidebar-top">
               <p>
               </p>
+            </div>
+            <div metal:define-slot="sidebar"></div>
+          </div>
+          <div class="col-md-9">
+            <div metal:define-slot="content"></div>
+          </div>
+        </div>
+
+        <div metal:define-slot="full-width"></div>
+
+      </div>
+    </div>
+
+    <script src="//oss.maxcdn.com/libs/jquery/1.10.2/jquery.min.js" integrity="sha384-aBL3Lzi6c9LNDGvpHkZrrm3ZVsIwohDD7CDozL0pk8FwCrfmV7H9w8j3L7ikEv6h" crossorigin="anonymous"></script>
+    <script src="//oss.maxcdn.com/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js" integrity="sha384-s1ITto93iSMDxlp/79qhWHi+LsIi9Gx6yL+cOKDuymvihkfol83TYbLbOw+W/wv4" crossorigin="anonymous"></script>
+    <script src="${request.static_url('eea.corpus:static/scripts.js')}?x=5" ></script>
+
+    <metal:foot define-slot="js_slot">
+      <tal:block repeat="reqt js_links|[]">
+        <script type="text/javascript" src="${request.static_url(reqt)}"></script>
+      </tal:block>
+    </metal:foot>
+
+  </body>
+</html>
