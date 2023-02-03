@@ -10,4 +10,11 @@
       <!-- <div class="pull&#45;right"> -->
       <!--   <form method="GET" action="/process/${request.matchdict.get('name')}/"> -->
       <!--     <button class="btn btn&#45;tertiary"> -->
-      <!--       <span class="glyphicon glyp
+      <!--       <span class="glyphicon glyphicon&#45;cog"></span> Reprocess corpus -->
+      <!--     </button> -->
+      <!--   </form> -->
+      <!-- </div> -->
+      <h2>${request.matchdict.get('doc')}</h2>
+      <div tal:condition="m">
+        <p>
+        A corpus of 
