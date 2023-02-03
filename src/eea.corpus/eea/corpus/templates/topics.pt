@@ -17,4 +17,10 @@
       <h2>${request.matchdict.get('doc')}</h2>
       <div tal:condition="m">
         <p>
-        A corpus of 
+        A corpus of ${m.docs} documents, ${m.sentences} sentences and
+        ${m.tokens} tokens in language '${m.lang}'.
+        <span tal:condition="dtm">${dtm[1]} terms processed.</span>
+        </p>
+      </div>
+      <div tal:condition="vis" tal:replace="structure vis"></div>
+    </di
