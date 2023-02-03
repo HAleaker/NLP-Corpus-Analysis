@@ -23,4 +23,6 @@
         </p>
       </div>
       <div tal:condition="vis" tal:replace="structure vis"></div>
-    </di
+    </div>
+  </div>
+</div>
