@@ -6,4 +6,13 @@
   <div metal:fill-slot="full-width">
     <div class="row">
       <div class="col-md-12">
-        <h
+        <h1>${corpus.title}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li>
+              <a tal:condition="prevp is not 
