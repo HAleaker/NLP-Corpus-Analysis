@@ -21,4 +21,13 @@
             </li>
             <li><a>Document ${page + 1} of ${corpus.n_docs}</a></li>
             <li>
-              <a tal:condi
+              <a tal:condition="nextp" href="./${nextp}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="col-md-7" id="corpus-form">
+        <div 
