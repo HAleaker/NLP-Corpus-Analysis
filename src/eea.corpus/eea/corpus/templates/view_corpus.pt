@@ -30,4 +30,14 @@
       </div>
 
       <div class="col-md-7" id="corpus-form">
-        <div 
+        <div tal:replace="nothing">
+          <h4>
+            A document of ${doc.n_sents} sentences and ${doc.n_tokens} tokens
+          </h4>
+        </div>
+        <p>
+          ${doc.text}
+        </p>
+      </div>
+
+      <div class="col-md-5"
