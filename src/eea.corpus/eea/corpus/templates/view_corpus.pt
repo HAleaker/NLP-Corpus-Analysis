@@ -40,4 +40,11 @@
         </p>
       </div>
 
-      <div class="col-md-5"
+      <div class="col-md-5">
+        <div class="content">
+          <h4>Metadata</h4>
+          <ul>
+            <li tal:repeat="key doc.metadata.keys()">
+              <strong>${key}</strong>
+              <p tal:define="val doc.metadata[key]"
+             tal:content="isinstance(val
