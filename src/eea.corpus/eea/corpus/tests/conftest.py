@@ -26,4 +26,12 @@ def simple_content_stream(text_column_stream):
     content = (
         [w.strip().lower() for w in s if w.strip() and w.strip().isalpha()]
 
-        for s i
+        for s in content
+    )
+
+    return content
+
+
+@pytest.fixture
+def doc_content_stream(text_column_stream):
+    return ({'text': text, 'metadata': None} for text in text_column_stream)
