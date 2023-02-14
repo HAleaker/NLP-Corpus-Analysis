@@ -17,4 +17,13 @@ def text_column_stream():
 @pytest.fixture
 def simple_content_stream(text_column_stream):
     from itertools import chain
-    # from 
+    # from textacy.doc import Doc
+
+    content = chain.from_iterable(
+        Doc(text).tokenized_text for text in text_column_stream
+    )
+
+    content = (
+        [w.strip().lower() for w in s if w.strip() and w.strip().isalpha()]
+
+        for s i
