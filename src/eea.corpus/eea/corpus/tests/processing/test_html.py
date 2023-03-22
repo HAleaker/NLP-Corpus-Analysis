@@ -17,4 +17,9 @@ class TestHTML:
         content = ({'text': s, 'metadata': None} for s in self.texts)
         content = process(content, {})
 
-      
+        assert next(content)['text'] == 'Hello world'
+        assert next(content)['text'] == 'Just plain text'
+
+    @patch('eea.corpus.processing.html.set_text')
+    def test_set_text_with_error(self, set_text):
+        from eea.corpus.processing.html impor
