@@ -22,4 +22,13 @@ class TestHTML:
 
     @patch('eea.corpus.processing.html.set_text')
     def test_set_text_with_error(self, set_text):
-        from eea.corpus.processing.html impor
+        from eea.corpus.processing.html import process
+
+        set_text.side_effect = ValueError()
+        doc = {'text': 'hello world', 'metadata': None}
+
+        stream = process([doc], {})
+        assert list(stream) == []
+
+    @patch('eea.corpus.processing.html.BeautifulSoup')
+    def test_get_text_with_error(self, Bea
