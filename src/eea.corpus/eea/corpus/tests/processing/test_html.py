@@ -39,4 +39,5 @@ class TestHTML:
 
         doc = {'text': 'hello world', 'metadata': None}
 
-   
+        stream = process([doc], {})
+        assert list(stream) == []
