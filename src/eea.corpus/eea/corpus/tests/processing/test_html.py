@@ -31,4 +31,12 @@ class TestHTML:
         assert list(stream) == []
 
     @patch('eea.corpus.processing.html.BeautifulSoup')
-    def test_get_text_with_error(self, Bea
+    def test_get_text_with_error(self, BeautifulSoup):
+        from eea.corpus.processing.html import process
+
+        BeautifulSoup.return_value = Mock()
+        BeautifulSoup.return_value.get_text.side_effect = ValueError()
+
+        doc = {'text': 'hello world', 'metadata': None}
+
+   
