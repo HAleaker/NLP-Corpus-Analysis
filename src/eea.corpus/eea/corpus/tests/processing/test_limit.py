@@ -12,4 +12,8 @@ class TestLimit:
         content = process(iter(text), {}, max_count=10)
         assert len(list(content)) == 10
 
-        
+        content = process(iter(text), {}, max_count=0)
+        assert len(list(content)) == 40
+
+        content = process(iter(text), {})
+        assert len(list(content)) == 10
