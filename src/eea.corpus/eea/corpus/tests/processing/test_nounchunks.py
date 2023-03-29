@@ -12,4 +12,8 @@ by overexploitation in many parts of Europe, especially in the western and
 eastern European basins. A positive development is that water abstraction
 decreased by around 7 %between 2002 and 2014. Agriculture is still the main
 pressure on renewable water resources. In the spring of 2014, this sector used
-66 % of the 
+66 % of the total water used in Europe. Around 80 % of total water abstraction
+
+for agriculture occurred in the Mediterranean region. The total irrigated area
+in southern Europe increased by 12 % between 2002 and 2014, but the total
+harvested agricultural p
