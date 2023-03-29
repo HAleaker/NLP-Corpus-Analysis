@@ -16,4 +16,7 @@ pressure on renewable water resources. In the spring of 2014, this sector used
 
 for agriculture occurred in the Mediterranean region. The total irrigated area
 in southern Europe increased by 12 % between 2002 and 2014, but the total
-harvested agricultural p
+harvested agricultural production decreased by 36 % in the same period in this
+region.   On average, water supply for households per capita is around 102
+L/person per day in Europe, which means that there is 'no water stress'.
+However, water scarcity conditions created by
