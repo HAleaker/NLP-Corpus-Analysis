@@ -9,3 +9,7 @@ of 2014, there were 86 million inhabitants inthese areas. Around 40 % of the
 inhabitants in the Mediterranean region lived under water stress conditions in
 the summer of 2014. Groundwater resources and rivers continue to be affected
 by overexploitation in many parts of Europe, especially in the western and
+eastern European basins. A positive development is that water abstraction
+decreased by around 7 %between 2002 and 2014. Agriculture is still the main
+pressure on renewable water resources. In the spring of 2014, this sector used
+66 % of the 
