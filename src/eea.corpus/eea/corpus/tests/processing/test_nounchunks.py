@@ -22,4 +22,7 @@ L/person per day in Europe, which means that there is 'no water stress'.
 However, water scarcity conditions created by population growth and
 urbanisation, including tourism, have particularly affected small Mediterranean
 islands and highly populated areas in recent years. Because of the huge
-volumes of water abstracted for hydropower and cooling, the 
+volumes of water abstracted for hydropower and cooling, the hydromorphology and
+natural hydrological regimes of rivers and lakes continue to be altered. The
+targets set in the water scarcity roadmap, as well as the key objectives of the
+Seventh Environment Action Programme in the context of wate
