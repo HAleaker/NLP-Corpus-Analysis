@@ -19,4 +19,7 @@ in southern Europe increased by 12 % between 2002 and 2014, but the total
 harvested agricultural production decreased by 36 % in the same period in this
 region.   On average, water supply for households per capita is around 102
 L/person per day in Europe, which means that there is 'no water stress'.
-However, water scarcity conditions created by
+However, water scarcity conditions created by population growth and
+urbanisation, including tourism, have particularly affected small Mediterranean
+islands and highly populated areas in recent years. Because of the huge
+volumes of water abstracted for hydropower and cooling, the 
