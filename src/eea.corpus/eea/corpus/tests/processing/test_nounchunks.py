@@ -25,4 +25,11 @@ islands and highly populated areas in recent years. Because of the huge
 volumes of water abstracted for hydropower and cooling, the hydromorphology and
 natural hydrological regimes of rivers and lakes continue to be altered. The
 targets set in the water scarcity roadmap, as well as the key objectives of the
-Seventh Environment Action Programme in the context of wate
+Seventh Environment Action Programme in the context of water quantity, were not
+achieved in Europe for the years 20022014. 'wei' (water exploitation index)
+water abstraction  CSI CSI018 WAT WAT001 018 001
+"""
+
+
+class TestNounChunks:
+    def make_one(self, mode, drop=
