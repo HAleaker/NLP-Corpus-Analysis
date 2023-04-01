@@ -32,4 +32,11 @@ water abstraction  CSI CSI018 WAT WAT001 018 001
 
 
 class TestNounChunks:
-    def make_one(self, mode, drop=
+    def make_one(self, mode, drop=True, min_freq=1):
+        from eea.corpus.processing.noun_chunks import process
+
+        doc = {'text': TEXT, 'metadata': None}
+
+        settings = {
+            'mode': mode,
+            'drop_determiners':
