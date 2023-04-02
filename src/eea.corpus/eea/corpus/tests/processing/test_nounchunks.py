@@ -39,4 +39,14 @@ class TestNounChunks:
 
         settings = {
             'mode': mode,
-            'drop_determiners':
+            'drop_determiners': drop,
+            'min_freq': min_freq
+        }
+        stream = process([doc], {}, **settings)
+
+        return next(stream)
+
+    def test_tokenize(self):
+        res = self.make_one('tokenize')
+
+        assert 'renewable_water' in res['text
