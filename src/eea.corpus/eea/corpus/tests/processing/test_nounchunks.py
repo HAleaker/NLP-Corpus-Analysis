@@ -49,4 +49,13 @@ class TestNounChunks:
     def test_tokenize(self):
         res = self.make_one('tokenize')
 
-        assert 'renewable_water' in res['text
+        assert 'renewable_water' in res['text']
+        assert 'renewable water' not in res['text']
+
+        assert 'positive_development' in res['text']
+        assert 'A positive development' not in res['text']
+
+        assert 'In general' in res['text']
+
+    def test_append(self,):
+        
