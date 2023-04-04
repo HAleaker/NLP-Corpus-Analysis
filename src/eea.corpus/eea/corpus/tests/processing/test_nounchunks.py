@@ -64,4 +64,14 @@ class TestNounChunks:
         assert 'renewable water' in res['text']
 
         assert 'positive_development' in res['text']
-        assert 'A positive development' in res['text'
+        assert 'A positive development' in res['text']
+
+        assert 'In general' in res['text']
+
+    def test_replace(self,):
+        res = self.make_one('replace')
+
+        assert 'renewable_water' in res['text']
+        assert 'renewable water' not in res['text']
+
+        assert 'positive_deve
