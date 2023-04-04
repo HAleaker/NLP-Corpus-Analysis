@@ -58,4 +58,10 @@ class TestNounChunks:
         assert 'In general' in res['text']
 
     def test_append(self,):
-        
+        res = self.make_one('append')
+
+        assert 'renewable_water' in res['text']
+        assert 'renewable water' in res['text']
+
+        assert 'positive_development' in res['text']
+        assert 'A positive development' in res['text'
