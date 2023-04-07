@@ -80,4 +80,5 @@ class TestNounChunks:
         assert 'In general' not in res['text']
 
     def test_schema(self):
-        from eea.corpus.processing.noun_chunks import Noun
+        from eea.corpus.processing.noun_chunks import NounChunks
+        assert len(NounChunks().children) == 3
