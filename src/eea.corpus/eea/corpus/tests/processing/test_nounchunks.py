@@ -74,4 +74,10 @@ class TestNounChunks:
         assert 'renewable_water' in res['text']
         assert 'renewable water' not in res['text']
 
-        assert 'positive_deve
+        assert 'positive_development water_abstraction' in res['text']
+        assert 'A positive development' not in res['text']
+
+        assert 'In general' not in res['text']
+
+    def test_schema(self):
+        from eea.corpus.processing.noun_chunks import Noun
