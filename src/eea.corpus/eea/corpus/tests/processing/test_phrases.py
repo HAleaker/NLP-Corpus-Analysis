@@ -437,3 +437,96 @@ class TestWaitFinishJob:
     def test_get_job_finish_status(self, get_assigned_job, time):
 
         from eea.corpus.processing.phrases.utils import get_job_finish_status
+
+        get_assigned_job.return_value = None
+        assert get_job_finish_status(1) is False
+        assert time.sleep.call_count == 0
+
+        job = Mock()
+        get_assigned_job.return_value = job
+
+        job.get_status.return_value = 'finished'
+        assert get_job_finish_status(1) is True
+        assert time.sleep.call_count == 0
+
+        job.get_status.return_value = 'failed'
+        assert get_job_finish_status(1) is False
+        assert time.sleep.call_count == 0
+
+        class Timer:
+            """ Factory for a timer function with limited lifetime
+
+            If called for a certain finite amount of times, it will call its
+            breaker function, and possibly affect the global environment
+            """
+
+            def __init__(self, count, breaker):
+                self.count = 0
+                # self.sleep = 0
+                self.maxcount = count
+                self.breaker = breaker
+                self.hit = False
+
+            def __call__(self, s):
+                self.count += 1
+                # self.sleep += s
+                if self.count >= self.maxcount:
+                    self.hit = True
+                    self.breaker()
+
+        def toggle_status(st):
+            job.get_status.return_value = st
+
+        def raise_error():
+            raise ValueError
+
+        # the job changes status too late, we get False as result
+        t = Timer(11, lambda: toggle_status('started'))
+        time.sleep = t
+        job.get_status.return_value = 'queued'
+        assert get_job_finish_status(1) is False
+        assert t.count == 10
+        assert t.hit is False
+
+        # the job changes status just in time, we get True as result
+        t = Timer(9, lambda: toggle_status('finished'))
+        time.sleep = t
+        job.get_status.return_value = 'queued'
+        assert get_job_finish_status(1) is True
+        assert t.hit is True
+        assert t.count == 9
+
+        # a started job will never fail. We'll intrerupt it at count 20
+        t = Timer(20, raise_error)
+        time.sleep = t
+        job.get_status.return_value = 'started'
+        with pytest.raises(ValueError):
+            get_job_finish_status(1)
+
+
+class TestViews:
+
+    @patch('eea.corpus.processing.phrases.views.get_assigned_job')
+    def test_phrase_model_status(self, get_assigned_job):
+        from eea.corpus.processing.phrases.views import phrase_model_status
+        from pkg_resources import resource_filename
+
+        base_path = resource_filename('eea.corpus', 'tests/fixtures/')
+
+        o_st = phrase_model_status.__globals__['CORPUS_STORAGE']
+        phrase_model_status.__globals__['CORPUS_STORAGE'] = base_path
+
+        req = Mock(matchdict={'phash_id': 'A'})
+        assert phrase_model_status(req) == {'status': 'OK'}
+
+        get_assigned_job.return_value = None
+        req = Mock(matchdict={'phash_id': 'X'})
+        assert phrase_model_status(req) == {'status': 'unavailable'}
+
+        job = Mock()
+        get_assigned_job.return_value = job
+        job.get_status.return_value = '_job_status_here_'
+        assert phrase_model_status(req) == {'status':
+                                            'preview__job_status_here_'}
+
+        phrase_model_status.__globals__['CORPUS_STORAGE'] = o_st
