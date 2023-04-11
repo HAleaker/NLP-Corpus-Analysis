@@ -9,4 +9,6 @@ class TestPreprocess:
         stream = process(doc_content_stream, {})
 
         doc = next(stream)
-        assert isinstance(doc, dict
+        assert isinstance(doc, dict)
+        assert doc['text'].startswith(
+            'assessment-2 Use of freshwater resources')
