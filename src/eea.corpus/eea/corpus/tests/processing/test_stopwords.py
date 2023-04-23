@@ -12,4 +12,11 @@ class TestStopWords:
 
     def test_schema(self):
         from eea.corpus.processing.stopwords import StopWords
-        assert len(StopWords().children) =
+        assert len(StopWords().children) == 0
+
+    def test_remove_stopwords(self):
+        from eea.corpus.processing.stopwords import process
+        # from textacy.doc import Doc
+
+        doc = {'text': self.text, 'metadata': None}
+        content = process([doc],
