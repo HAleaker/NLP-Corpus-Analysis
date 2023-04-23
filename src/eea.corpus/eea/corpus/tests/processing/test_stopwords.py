@@ -6,4 +6,10 @@ class TestStopWords:
     particularly in southern Europe. The densely populated river basins in
     different parts of Europe, which correspond to 11 % of the total area of
     Europe, continue to be hotspots for water stress conditions, and, in the
-    summer of 2014, there were 86 million inhabitants inthese areas. Around
+    summer of 2014, there were 86 million inhabitants inthese areas. Around 40%
+    of the inhabitants in the Mediterranean region lived under water stress
+    conditions in the summer of 2014."""
+
+    def test_schema(self):
+        from eea.corpus.processing.stopwords import StopWords
+        assert len(StopWords().children) =
