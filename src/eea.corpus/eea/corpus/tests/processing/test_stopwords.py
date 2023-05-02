@@ -19,4 +19,8 @@ class TestStopWords:
         # from textacy.doc import Doc
 
         doc = {'text': self.text, 'metadata': None}
-        content = process([doc],
+        content = process([doc], {})
+        text = next(content)
+
+        assert 'general' in text['text']
+        assert 'from' not in text['text']
