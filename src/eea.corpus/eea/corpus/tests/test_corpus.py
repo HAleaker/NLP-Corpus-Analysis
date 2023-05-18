@@ -19,4 +19,10 @@ class TestCorpus:
         assert len(x) == 100
         assert len(list(corpus)) == 100
         assert len(list(corpus)) == 100
-        assert
+        assert corpus._use_cache is True
+        assert len(corpus._cache) == 100
+
+    @patch('eea.corpus.corpus.load_corpus_metadata')
+    @patch('eea.corpus.corpus.corpus_base_path')
+    def test_corpus_metadata(self, corpus_base_path, load_corpus_metadata):
+      
