@@ -32,4 +32,10 @@ class TestCorpus:
             'statistics': {'docs': 30},
             'title': 'corpus title',
             'description': 'corpus description',
-    
+        }
+        assert corpus.n_docs == 30
+        assert corpus.title == 'corpus title'
+        assert corpus.description == 'corpus description'
+
+    @patch('eea.corpus.corpus.corpus_base_path')
+    @patch('eea.corpus.corpus.build_pipeline
