@@ -47,4 +47,13 @@ class TestCorpus:
         path.mkdir()
 
         build_pipeline.return_value = [
-  
+            {
+                'text': 'Hello world',
+                'metadata': {'1': 2}
+            },
+            {
+                'text': 'Second time',
+                'metadata': {'3': 4},
+            }
+        ]
+        corpus_base
