@@ -38,4 +38,13 @@ class TestCorpus:
         assert corpus.description == 'corpus description'
 
     @patch('eea.corpus.corpus.corpus_base_path')
-    @patch('eea.corpus.corpus.build_pipeline
+    @patch('eea.corpus.corpus.build_pipeline')
+    def test_build_corpus(self, build_pipeline, corpus_base_path, tmpdir):
+        from eea.corpus.corpus import build_corpus
+        import json
+
+        path = tmpdir.join('.', 'test.csv')
+        path.mkdir()
+
+        build_pipeline.return_value = [
+  
