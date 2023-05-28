@@ -56,4 +56,12 @@ class TestCorpus:
                 'metadata': {'3': 4},
             }
         ]
-        corpus_base
+        corpus_base_path.return_value = str(path)
+
+        pipeline = []
+        corpus_id = 'test'
+        file_name = 'test.csv'
+        text_column = 'text'
+        kw = {'title': 'first corpus', 'description': 'something else'}
+
+        build_corpus(pipeline, corpus_id, file_name
