@@ -64,4 +64,12 @@ class TestCorpus:
         text_column = 'text'
         kw = {'title': 'first corpus', 'description': 'something else'}
 
-        build_corpus(pipeline, corpus_id, file_name
+        build_corpus(pipeline, corpus_id, file_name, text_column, **kw)
+
+        assert path.join('test_info.json').exists()
+        assert path.join('test_docs.json').exists()
+
+        docs = []
+        with path.join('test_docs.json').open() as f:
+            for line in f:
+                doc = json.loa
