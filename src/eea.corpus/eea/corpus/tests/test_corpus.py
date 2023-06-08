@@ -72,4 +72,11 @@ class TestCorpus:
         docs = []
         with path.join('test_docs.json').open() as f:
             for line in f:
-                doc = json.loa
+                doc = json.loads(line)
+                docs.append(doc)
+
+        assert docs[0] == {'text': 'Hello world', 'metadata': {'1': 2}}
+        assert docs[1] == {'text': 'Second time', 'metadata': {'3': 4}}
+        assert len(docs) == 2
+
+        with path.j
