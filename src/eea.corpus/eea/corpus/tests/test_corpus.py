@@ -79,4 +79,11 @@ class TestCorpus:
         assert docs[1] == {'text': 'Second time', 'metadata': {'3': 4}}
         assert len(docs) == 2
 
-        with path.j
+        with path.join('test_info.json').open() as f:
+            meta = json.load(f)
+            assert meta == {
+                'description': 'something else',
+                'title': 'first corpus',
+                'statistics': {
+                    'docs': 2,
+             
