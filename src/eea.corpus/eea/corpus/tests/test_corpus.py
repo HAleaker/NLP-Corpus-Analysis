@@ -86,4 +86,12 @@ class TestCorpus:
                 'title': 'first corpus',
                 'statistics': {
                     'docs': 2,
-             
+                    'lang': 'en'
+                },
+                'kw': {},
+                'text_column': 'text'
+            }
+
+    @patch('eea.corpus.corpus.Corpus')
+    @patch('eea.corpus.corpus.extract_corpus_id')
+    def test_get_c
