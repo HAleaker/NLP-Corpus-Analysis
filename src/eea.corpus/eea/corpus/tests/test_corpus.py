@@ -94,4 +94,12 @@ class TestCorpus:
 
     @patch('eea.corpus.corpus.Corpus')
     @patch('eea.corpus.corpus.extract_corpus_id')
-    def test_get_c
+    def test_get_corpus(self, extract_corpus_id, Corpus):
+        from eea.corpus.corpus import get_corpus
+
+        extract_corpus_id.return_value = ('doc-a', 'corpus-b')
+        Corpus.return_value = object()
+
+        request = Mock()
+        corpus = get_corpus(request)
+        a
