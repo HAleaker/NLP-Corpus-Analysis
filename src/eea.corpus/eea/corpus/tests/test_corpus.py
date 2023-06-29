@@ -102,4 +102,9 @@ class TestCorpus:
 
         request = Mock()
         corpus = get_corpus(request)
-        a
+        assert corpus is Corpus.return_value
+        Corpus.assert_called_with(file_name='doc-a', corpus_id='corpus-b')
+
+        corpus = get_corpus(request, 'doc-b', 'corpus-c')
+        assert corpus is Corpus.return_value
+        Corpus.assert_called_with(file_name=
