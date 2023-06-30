@@ -22,4 +22,11 @@ class TestProcessing:
             'eea.corpus', 'tests/fixtures/test.csv')
         text_column = 'text'
 
-     
+        pipeline = [
+            ('eea_corpus_processing_limit_process', 'ABC', {'max_count': 2})
+        ]
+
+        stream = build_pipeline(file_name, text_column, pipeline,
+                                preview_mode=True)
+
+        docs = list(strea
