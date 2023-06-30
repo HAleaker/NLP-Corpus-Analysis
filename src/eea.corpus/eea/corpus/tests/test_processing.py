@@ -29,4 +29,5 @@ class TestProcessing:
         stream = build_pipeline(file_name, text_column, pipeline,
                                 preview_mode=True)
 
-        docs = list(strea
+        docs = list(stream)
+        assert len(docs) == 2
