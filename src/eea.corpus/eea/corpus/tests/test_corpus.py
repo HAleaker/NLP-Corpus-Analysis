@@ -107,4 +107,4 @@ class TestCorpus:
 
         corpus = get_corpus(request, 'doc-b', 'corpus-c')
         assert corpus is Corpus.return_value
-        Corpus.assert_called_with(file_name=
+        Corpus.assert_called_with(file_name='doc-b', corpus_id='corpus-c')
