@@ -27,4 +27,10 @@ class TestCreateCorpus:
 
     @classmethod
     def teardown_class(cls):
-        testing.t
+        testing.tearDown()
+
+    def test_apply_schema_edits(self):
+        from eea.corpus.processing import pipeline_registry as pr
+        from eea.corpus.views import CreateCorpusView
+
+        LimitSchema = pr['eea_corpus_processing_limit_process'].s
