@@ -14,4 +14,17 @@ class TestHome:
 
         assert home(None) == {
             'project': 'EEA Corpus Server',
-            'document
+            'documents': S.docs
+        }
+
+
+class TestCreateCorpus:
+
+    @classmethod
+    def setup_class(cls):
+        cls.config = testing.setUp()
+        cls.config.scan('eea.corpus.processing')
+
+    @classmethod
+    def teardown_class(cls):
+        testing.t
