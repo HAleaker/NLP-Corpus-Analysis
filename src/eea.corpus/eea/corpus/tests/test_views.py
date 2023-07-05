@@ -33,4 +33,10 @@ class TestCreateCorpus:
         from eea.corpus.processing import pipeline_registry as pr
         from eea.corpus.views import CreateCorpusView
 
-        LimitSchema = pr['eea_corpus_processing_limit_process'].s
+        LimitSchema = pr['eea_corpus_processing_limit_process'].schema
+        HTMLSchema = pr['eea_corpus_processing_html_process'].schema
+        PrepSchema = pr['eea_corpus_processing_preprocess_process'].schema
+
+        schemas = [
+            LimitSchema(name='1st'),
+            HTMLSchema(nam
