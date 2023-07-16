@@ -39,4 +39,12 @@ class TestCreateCorpus:
 
         schemas = [
             LimitSchema(name='1st'),
-            HTMLSchema(nam
+            HTMLSchema(name='2st'),
+            PrepSchema(name='3st'),
+        ]
+
+        req = testing.DummyRequest()
+        view = CreateCorpusView(req)
+        res = view._apply_schema_edits(schemas, ['move_up_1st_success'])
+        assert [x.name for x in res] == [
+ 
