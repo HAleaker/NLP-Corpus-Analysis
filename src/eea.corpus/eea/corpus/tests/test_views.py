@@ -47,4 +47,12 @@ class TestCreateCorpus:
         view = CreateCorpusView(req)
         res = view._apply_schema_edits(schemas, ['move_up_1st_success'])
         assert [x.name for x in res] == [
- 
+            '1st', '2st', '3st'
+        ]
+
+        # TODO: finish test
+
+
+class TestClassificationView:
+    def test_schema(self):
+        pass
