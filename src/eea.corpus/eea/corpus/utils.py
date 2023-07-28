@@ -13,4 +13,15 @@ logger = logging.getLogger('eea.corpus')
 
 
 def rand(n):
-    re
+    return ''.join(random.sample(string.ascii_uppercase + string.digits, k=n))
+
+
+def is_valid_document(file_name):
+    return file_name in os.listdir(CORPUS_STORAGE)
+
+
+def document_name(request):
+    """ Extract document name (aka file_name) from request
+    """
+
+    md = request.ma
