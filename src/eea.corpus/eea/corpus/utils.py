@@ -24,4 +24,16 @@ def document_name(request):
     """ Extract document name (aka file_name) from request
     """
 
-    md = request.ma
+    md = request.matchdict or {}
+    doc = md.get('doc')
+
+    if not is_valid_document(doc):
+        raise ValueError("Not a valid document: %s" % doc)
+
+    return doc
+
+
+def hashed_id(items):
+    """ Generate a short id based on a list of items.
+
+    >>> raise Va
