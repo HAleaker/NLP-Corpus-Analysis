@@ -36,4 +36,13 @@ def document_name(request):
 def hashed_id(items):
     """ Generate a short id based on a list of items.
 
-    >>> raise Va
+    >>> raise ValueError
+
+    The items should be in a stable, "hashable" form:
+        - dictionaries should be converted to tuples (k, v) and sorted
+
+    """
+    # same options will generate the same corpus id
+    m = hashlib.sha224()
+
+    for kv in items:
