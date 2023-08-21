@@ -46,3 +46,16 @@ def hashed_id(items):
     m = hashlib.sha224()
 
     for kv in items:
+        m.update(str(kv).encode('ascii'))
+
+    return m.hexdigest()
+
+
+def set_text(doc, text):
+    """ Build a new doc based on doc's metadata and provided text
+    """
+
+    return {'text': text, 'metadata': doc['metadata']}
+
+
+def
