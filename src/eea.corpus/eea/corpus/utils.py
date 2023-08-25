@@ -58,4 +58,15 @@ def set_text(doc, text):
     return {'text': text, 'metadata': doc['metadata']}
 
 
-def
+def is_locked(fpath):
+    """ Check if a lock file exists for given path
+    """
+    path = fpath + '.lock'
+
+    return os.path.exists(path)
+
+
+def schema_defaults(schema):
+    """ Returns a mapping of fielname:defaultvalue
+    """
+  
