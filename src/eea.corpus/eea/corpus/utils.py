@@ -69,4 +69,16 @@ def is_locked(fpath):
 def schema_defaults(schema):
     """ Returns a mapping of fielname:defaultvalue
     """
-  
+    res = {}
+
+    for child in schema.children:
+        if child.default is not None:
+            res[child.name] = child.default
+        else:
+            res[child.name] = child.missing
+
+    return res
+
+
+def tokenize(phrase, delimiter='_'):
+   
