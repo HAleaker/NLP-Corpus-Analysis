@@ -81,4 +81,16 @@ def schema_defaults(schema):
 
 
 def tokenize(phrase, delimiter='_'):
-   
+    """ Tokenizes a phrase (converts those words to a unique token)
+    """
+
+    words = phrase.split(' ')
+    res = []
+
+    # remove the 's in text
+
+    for w in words:
+        w = w.split("'")[0]
+        res.append(w)
+
+    ret
