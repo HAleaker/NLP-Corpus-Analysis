@@ -93,4 +93,16 @@ def tokenize(phrase, delimiter='_'):
         w = w.split("'")[0]
         res.append(w)
 
-    ret
+    return delimiter.join(res)
+
+
+def handle_slash(words):
+    for word in words:
+        for bit in word.split('/'):
+            yield bit
+
+
+def handle_numbers(words):
+    for word in words:
+        if word.isnumeric():
+            yield "*
