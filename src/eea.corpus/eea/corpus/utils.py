@@ -105,4 +105,18 @@ def handle_slash(words):
 def handle_numbers(words):
     for word in words:
         if word.isnumeric():
-            yield "*
+            yield "*number*"
+        yield word
+
+
+def lower_words(words):
+    yield from (w.lower() for w in words)
+
+
+def filter_small_words(words):
+    for w in words:
+        if len(w) > 2:
+            yield w
+
+
+handle_text = compose(filter_small_words, lower_words, handle_number
