@@ -130,4 +130,8 @@ def tokenizer(text):
 
     for c in ignore_chars:
         text = text.replace(c, ' ')
-    words
+    words = text.split(' ')
+
+    text = list(handle_text(words))
+
+    return text
