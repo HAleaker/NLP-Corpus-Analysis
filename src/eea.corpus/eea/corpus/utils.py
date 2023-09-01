@@ -119,4 +119,15 @@ def filter_small_words(words):
             yield w
 
 
-handle_text = compose(filter_small_words, lower_words, handle_number
+handle_text = compose(filter_small_words, lower_words, handle_numbers,
+                      handle_slash, )
+
+
+def tokenizer(text):
+    """ Tokenizes text. Returns lists of tokens (words)
+    """
+    ignore_chars = "()*:\"><][#\n\t'^%?=&"
+
+    for c in ignore_chars:
+        text = text.replace(c, ' ')
+    words
