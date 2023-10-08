@@ -8,4 +8,10 @@ The project aims to provide these methods over a REST API when feasible.
 
 ## Current features
 
-### Compose a text transformation pipeline to prepare a corp
+### Compose a text transformation pipeline to prepare a corpus
+
+Upload a CSV file, then click "Create a corpus" to access the pipeline composition page.
+
+### Create and visualise topic models via pyLDAvis.
+
+[Topic Modeling](https://en.wikipedia.org/wiki/Topic_model) technique is use
