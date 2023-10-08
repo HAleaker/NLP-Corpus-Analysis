@@ -31,4 +31,4 @@ This will start the application server on [localhost:8181](http://0.0.0.0:8181) 
 
 ## Corpus Data
 
-The latest dataset
+The latest dataset can be produced by visiting the [global catalogue](http://search.apps.eea.europa.eu/)  > See all results > download csv. Once the csv file is downloaded, you can pass it to this application to be analysed. Make sure the "documen
