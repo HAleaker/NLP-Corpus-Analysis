@@ -18,4 +18,17 @@ Upload a CSV file, then click "Create a corpus" to access the pipeline compositi
 
 [Video demonstration](https://www.youtube.com/watch?v=IksL96ls4o0&t=255s)
 
-![LDA visualisation exampl
+![LDA visualisation example](ldavis.png?raw=true "LDA visualisation example")
+
+## How to run:
+
+```
+docker-compose build
+docker-compose up -d
+```
+
+This will start the application server on [localhost:8181](http://0.0.0.0:8181) after some time.
+
+## Corpus Data
+
+The latest dataset
