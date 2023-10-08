@@ -14,4 +14,8 @@ Upload a CSV file, then click "Create a corpus" to access the pipeline compositi
 
 ### Create and visualise topic models via pyLDAvis.
 
-[Topic Modeling](https://en.wikipedia.org/wiki/Topic_model) technique is use
+[Topic Modeling](https://en.wikipedia.org/wiki/Topic_model) technique is used for finding topics. In machine learning and NLP, a topic model is a statistical model for identifying abstract "topics" in a document collection.
+
+[Video demonstration](https://www.youtube.com/watch?v=IksL96ls4o0&t=255s)
+
+![LDA visualisation exampl
