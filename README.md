@@ -31,4 +31,10 @@ This will start the application server on [localhost:8181](http://0.0.0.0:8181) 
 
 ## Corpus Data
 
-The latest dataset can be produced by visiting the [global catalogue](http://search.apps.eea.europa.eu/)  > See all results > download csv. Once the csv file is downloaded, you can pass it to this application to be analysed. Make sure the "documen
+The latest dataset can be produced by visiting the [global catalogue](http://search.apps.eea.europa.eu/)  > See all results > download csv. Once the csv file is downloaded, you can pass it to this application to be analysed. Make sure the "document text" to be analysed is the first column. The other columns are considered metadata.
+
+For testing, you may download an already prepared large corpus data:
+
+```
+curl -L -o data.csv https://www.dropbox.com/s/sihmoc4wwpl0kr2/data_all.csv?dl=1
+```
